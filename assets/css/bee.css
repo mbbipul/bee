@@ -1,0 +1,36 @@
+/*Changing navbar height*/
+nav {
+    height: 49px;
+    line-height: 49px;
+}
+
+nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+    height: 49px;
+    line-height: 49px;
+}
+
+nav .button-collapse i {
+    height: 49px;
+    line-height: 49px;
+}
+
+nav .brand-logo { 
+    font-size: 1.6rem; 
+}
+
+@media only screen and (min-width: 601px){
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+        height: 49px;
+        line-height: 49px;
+    }
+}
+/*Changing navbar height*/
+.bee-margin-left-24{
+    margin-left:24px!important;
+}
+.bee-margin-left-256{
+    margin-left:256px!important;
+}
+.bee-margin-left-168{
+    margin-left:168px!important;
+}
