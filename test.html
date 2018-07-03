@@ -9,14 +9,287 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"  />
+
+        <style>
+            /* single slide at once */
+.carousel-inner .active.left {left: -33%;}
+.carousel-inner .next        {left:  33%;}
+.carousel-inner .prev        {left: -33%;}
+.carousel-item.active.left   {opacity:0.3;}
+.carousel-item.active.right  {opacity:0.3;}
+
+.carousel-item.active.left > div:not(:first-child) {
+    display:none;
+}
+.carousel-item.active.right > div:not(:first-child) {
+    display:none;
+}
+
+.carousel-control {
+    color:#333;
+ }
+.carousel-control.left,
+.carousel-control.right {background-image:none;}
+.caption div {
+    box-shadow: 0 0 5px #C8C8C8;
+    transition: all 0.3s ease 0s;
+}
+.img-circle {
+    border-radius: 50%;
+}
+.img-circle {
+    border-radius: 0;
+}
+
+.ratio {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+    width: 100%;
+    top: 30px;
+}
+.img-circle {
+    border-radius: 50%;
+}
+.img-responsive {
+    display: block;
+    height: 50px!important;
+    max-width: 100%;
+}
+.profile-usertitle-name {
+    color: #5a7391;
+    font-size: 30px;
+    font-weight: 600;
+    position: absolute;
+    top: 0;
+}
+.class-card{
+    padding-left: 90px;
+    height: 100px!important;
+}
+.class-card-pro-name{
+    top: 10px;
+    padding-left: 40px;
+    position: absolute;
+    font-size: 25px;
+    font-weight: 600;
+}
+.red {
+ 
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.circles {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 1em auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-border-radius: 99em;
+  -moz-border-radius: 99em;
+  border-radius: 99em;
+  border: 5px solid #eee;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+  margin-top: 50px;
+  position:absoulate;
+  margin-left:145px;
+}
+.profile-usertitle-name {
+    color: #5a7391;
+    font-size: 30px;
+    font-weight: 600;
+    position: absolute;
+    margin-top: 15px;
+  left:145px;
+}
+.class-card-pro-name{
+    top: 40px;
+    padding-left: 5px;
+    position: absolute;
+    font-size: 20px!important;
+    font-weight: 600;
+}
+.list-inline {
+  padding-left: 0;
+  margin-left: -5px;
+  list-style: none;
+}
+.list-inline > li {
+  display: inline-block;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+.tag{
+  border : 1px solid black;
+  z-index: 3;
+  border-radius: 5px;
+  padding:5px;
+  background-color: #006064;
+}
+.card-tag-list{
+left:-5px!important;
+}
+
+        </style>
     </head>
     <body>
-        <frameset cols="25%,*,25%">
+        <div class="col-md-4 offset-md-2">
+  <div class="carousel slide text-center" id="myCarousel" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="col-md-12">
+            <div class="card text-center">
+                <div class="card-header class-card">
+                  <div class="media" style="height: 55px;width: 55px;">
+                <div class="profile-usertitle-name"> MATH-2202 </div>
+                <a href="#" class="ratio img-responsive img-circle" style="background-image: url(http://trovacamporella.com/img/trovacamporella-fiat500.png);"><span class="class-card-pro-name">BeeSir</span></a>
+</div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                    <div class="col-md-3">hello</div>
+                    <div class="col-md-6">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                
+                    <div class="col-md-3">hello</div>
+                        
+                </div>
+                    </div>
+                <div class="card-footer text-muted">
+                    <p>2 days ago</p>
+                </div>
+            </div>
+                  
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="col-md-12"><a href="#"><img src="http://placehold.it/500/ccc?text=2" class="img-fluid"></a></div>
+      </div>
+      <div class="carousel-item">
+        <div class="col-md-12"><a href="#"><img src="http://placehold.it/500/999/fff?text=3" class="img-fluid"></a></div>
+      </div>
+      <div class="carousel-item">
+        <div class="col-md-12"><a href="#"><img src="http://placehold.it/500/ddd/?text=4" class="img-fluid"></a></div>
+      </div>
+      <div class="carousel-item">
+        <div class="col-md-12"><a href="#"><img src="http://placehold.it/500/aaa/333?text=5" class="img-fluid"></a></div>
+      </div>
+      <div class="carousel-item">
+        <div class="col-md-12"><a href="#"><img src="http://placehold.it/500/bbb/fff?text=6" class="img-fluid"></a></div>
+      </div>
+    </div>
+    <a class="left carousel-control mt-3 p-4" href="#myCarousel" data-slide="prev"> <i class="fa fa-chevron-left"></i> </a>
+    <a class="right carousel-control mt-3 p-4" href="#myCarousel" data-slide="next"> <i class="fa fa-chevron-right"></i> </a>
+  </div>
+</div>
+        <div class="row">
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-image">
+ <div class="carousel carousel-slider center" data-indicators="true">
+    <div class="carousel-fixed-item center">
+      
+      <a class="btn waves-effect white grey-text darken-text-2" style="top:10px;">button</a>
+    </div>
+    <div class="carousel-item red white-text" href="#one!">
+                      <div class="profile-usertitle-name"> MATH-2202 </div>
 
-  <frame src="assets/">
-</frameset>
-    
+      <div ><div class="circles" style="background-image: 
+        url('https://img.labnol.org/di/bo.jpg')"><p class="class-card-pro-name" style="margin-left:50px;">Beesir</p></div>
+        
+</div>
+      
+
+     <div class="card-content" style="margin:0px!important;padding;0px!important;top:2px!important;">
+              <p>I am a very simple card. I am good at containing small bits of information.
+              I am convenient because I require </p>
+       <p style="display: inline-block;" class="waves-effect waves-light tag">class starting time: 2:12:90</p>
+       <span class="tag waves-effect waves-light">Room: room212</span>
+            </div>
+            <div class="">
+              <ul class="list-inline " >
+  <li class=" tag card-tag-list waves-effect waves-light" >Assignment: bee</li>
+  <li  class=" tag card-tag-list waves-effect waves-light">Class test: chapter 2</li>
+  <li  class="waves-effect waves-light tag card-tag-list">Item 3 fhj hgjgjh</li>
+</ul>
+            </div>
+    </div>
+
+    <div class="carousel-item amber white-text" href="#two!">
+      <h2>Second Panel</h2>
+      <p class="white-text">This is your second panel</p>
+    </div>
+    <div class="carousel-item amber white-text" href="#two!">
+      <h2>Second Panel</h2>
+      <p class="white-text">This is your second panel</p>
+    </div>
+    <div class="carousel-item green white-text" href="#three!">
+      <h2>Third Panel</h2>
+      <p class="white-text">This is your third panel</p>
+    </div>
+    <div class="carousel-item blue white-text" href="#four!">
+      <h2>Fourth Panel</h2>
+      <div class="card-content">
+              <p>I am a very simple card. I am good at containing small bits of information.
+              I am convenient because I require little markup to use effectively.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+            </div>
+    </div>
+  </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
 
 
+        <script>
+            $('#myCarousel').carousel({
+  interval: 3000
+})
+
+$('.carousel .carousel-item').each(function(){
+  var next = $(this).next();
+  if (!next.length) {
+    next = $(this).siblings(':first');
+  }
+  next.children(':first-child').clone().appendTo($(this));
+  
+  if (next.next().l        <script>
+ength>0) {
+    next.next().children(':first-child').clone().appendTo($(this));
+  }
+  else {
+  	$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+  }
+});
+            </script>
+            <script>  
+                $('.carousel-slider').carousel({fullWidth: true, padding:0},setTimeout(autoplay, 4500));
+  function autoplay() {
+    $('.carousel').carousel('next');
+    setTimeout(autoplay, 9000);
+     }
+     
+     </script>
+
+    <script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
     </body>
 </html>

@@ -8,7 +8,7 @@
 <!------ Include the above in your HEAD tag ---------->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"  />
         <!--import w3css -->
         <!--Import bootstrap-->
         <link type="text/css" rel="stylesheet" href="assets/css/bee.css"  />
@@ -19,6 +19,13 @@
   <!-- styles just for demo -->
 		<link rel="icon" href="ICON.png">
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+        <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css'>
+         <!--Video player-->
+        <link href="https://vjs.zencdn.net/7.0.3/video-js.css" rel="stylesheet">
+
+  <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+  <script src="http://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+      <link rel="stylesheet" href="assets/css/beeCard.css">
         <style>
 	.bee-margin-left-24{
     margin-left:24px!important;
@@ -58,13 +65,364 @@
             .skin {text-transform: uppercase;white-space: nowrap;overflow: hidden;font-weight: bold;position: absolute;z-index: 10;left:0;right:0;bottom: 0;background: #fff;font-size:16px;color:#fff;background:#333;}
 			.skin select {background: #fff; font-size:inherit;text-transform: none; max-width: 30%;}
 			
-			#stories {max-width: 300px;margin:0 ;}
+			#stories {max-width: 450px;margin:0 ;}
 		
 			@media (min-width: 524px){
 				.disclaimer {margin: 12px auto;}
 			}
+                        .indicators {
+                            position: absolute;
+                            text-align: center;
+                            top: 348px;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            margin: 0;
+                            padding: 5px;
+                        }
+                        
+                        /*
+  Player Skin Designer for Video.js
+  http://videojs.com
+
+  To customize the player skin edit 
+  the CSS below. Click "details" 
+  below to add comments or questions.
+  This file uses some SCSS. Learn more  
+  at http://sass-lang.com/guide)
+
+  This designer can be linked to at:
+  https://codepen.io/heff/pen/EarCt/left/?editors=010
+*/
+.video-js {
+  /* The base font size controls the size of everything, not just text.
+     All dimensions use em-based sizes so that the scale along with the font size.
+     Try increasing it to 15px and see what happens. */
+  font-size: 10px;
+  /* The main font color changes the ICON COLORS as well as the text */
+  color: #fff;
+}
+
+/* The "Big Play Button" is the play button that shows before the video plays.
+   To center it set the align values to center and middle. The typical location
+   of the button is the center, but there is trend towards moving it to a corner
+   where it gets out of the way of valuable content in the poster image.*/
+.vjs-default-skin .vjs-big-play-button {
+  /* The font size is what makes the big play button...big. 
+     All width/height values use ems, which are a multiple of the font size.
+     If the .video-js font-size is 10px, then 3em equals 30px.*/
+  font-size: 3em;
+  /* We're using SCSS vars here because the values are used in multiple places.
+     Now that font size is set, the following em values will be a multiple of the
+     new font size. If the font-size is 3em (30px), then setting any of
+     the following values to 3em would equal 30px. 3 * font-size. */
+  /* 1.5em = 45px default */
+  line-height: 1.5em;
+  height: 1.5em;
+  width: 3em;
+  /* 0.06666em = 2px default */
+  border: 0.06666em solid #fff;
+  /* 0.3em = 9px default */
+  border-radius: 0.3em;
+  /* Align top left. 0.5em = 15px default */
+  left: 0.5em;
+  top: 0.5em;
+}
+
+/* The default color of control backgrounds is mostly black but with a little
+   bit of blue so it can still be seen on all-black video frames, which are common. */
+.video-js .vjs-control-bar,
+.video-js .vjs-big-play-button,
+.video-js .vjs-menu-button .vjs-menu-content {
+  /* IE8 - has no alpha support */
+  background-color: #2B333F;
+  /* Opacity: 1.0 = 100%, 0.0 = 0% */
+  background-color: rgba(43, 51, 63, 0.7);
+}
+
+/* Slider - used for Volume bar and Progress bar */
+.video-js .vjs-slider {
+  background-color: #73859f;
+  background-color: rgba(115, 133, 159, 0.5);
+}
+
+/* The slider bar color is used for the progress bar and the volume bar
+   (the first two can be removed after a fix that's coming) */
+.video-js .vjs-volume-level,
+.video-js .vjs-play-progress,
+.video-js .vjs-slider-bar {
+  background: #fff;
+}
+
+/* The main progress bar also has a bar that shows how much has been loaded. */
+.video-js .vjs-load-progress {
+  /* For IE8 we'll lighten the color */
+  background: #bfc7d3;
+  /* Otherwise we'll rely on stacked opacities */
+  background: rgba(115, 133, 159, 0.5);
+}
+
+/* The load progress bar also has internal divs that represent
+   smaller disconnected loaded time ranges */
+.video-js .vjs-load-progress div {
+  /* For IE8 we'll lighten the color */
+  background: white;
+  /* Otherwise we'll rely on stacked opacities */
+  background: rgba(115, 133, 159, 0.75);
+}
+
 		</style>
-        
+                        <style>
+            /* single slide at once */
+.carousel-inner .active.left {left: -33%;}
+.carousel-inner .next        {left:  33%;}
+.carousel-inner .prev        {left: -33%;}
+.carousel-item.active.left   {opacity:0.3;}
+.carousel-item.active.right  {opacity:0.3;}
+
+.carousel-item.active.left > div:not(:first-child) {
+    display:none;
+}
+.carousel-item.active.right > div:not(:first-child) {
+    display:none;
+}
+
+.carousel-control {
+    color:#333;
+ }
+.carousel-control.left,
+.carousel-control.right {background-image:none;}
+.caption div {
+    box-shadow: 0 0 5px #C8C8C8;
+    transition: all 0.3s ease 0s;
+}
+.img-circle {
+    border-radius: 50%;
+}
+.img-circle {
+    border-radius: 0;
+}
+
+.ratio {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+    width: 100%;
+    top: 30px;
+}
+.img-circle {
+    border-radius: 50%;
+}
+.img-responsive {
+    display: block;
+    height: 50px!important;
+    max-width: 100%;
+}
+.profile-usertitle-name {
+    color: #5a7391;
+    font-size: 30px;
+    font-weight: 600;
+    position: absolute;
+    top: 0;
+}
+.class-card{
+    padding-left: 90px;
+    height: 100px!important;
+}
+.class-card-pro-name{
+    top: 10px;
+    padding-left: 40px;
+    position: absolute;
+    font-size: 25px;
+    font-weight: 600;
+}
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,700);
+
+body {
+    background-color: rgb(229, 229, 229);
+    padding-top: 60px;
+    padding-bottom: 30px;
+}
+
+.panel-google-plus {
+    position: relative;
+    border-radius: 0px;
+    border: 1px solid rgb(216, 216, 216);
+    font-family: 'Roboto', sans-serif;
+}
+.panel-google-plus > .dropdown {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+}
+.panel-google-plus > .dropdown > span > span {
+    font-size: 10px;   
+}
+.panel-google-plus > .dropdown > .dropdown-menu {
+    left: initial;
+    right: 0px;
+    border-radius: 2px;
+}
+.panel-google-plus > .panel-google-plus-tags {
+    position: absolute;
+    top: 35px;
+    right: -3px;
+}
+.panel-google-plus > .panel-google-plus-tags > ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+.panel-google-plus > .panel-google-plus-tags > ul:hover {
+    box-shadow: 0px 0px 3px rgb(0, 0, 0);   
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);   
+}
+.panel-google-plus > .panel-google-plus-tags > ul > li {
+    display: block;
+    right: 0px;
+    width: 0px;
+    padding: 5px 0px 5px 0px;
+    background-color: rgb(245, 245, 245);
+    font-size: 12px;
+    overflow: hidden;
+}
+.panel-google-plus > .panel-google-plus-tags > ul > li::after {
+    content:"";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+	border-right: 3px solid rgb(66, 127, 237);
+}
+.panel-google-plus > .panel-google-plus-tags > ul:hover > li,
+.panel-google-plus > .panel-google-plus-tags > ul > li:first-child {
+    padding: 5px 15px 5px 10px;
+    width: auto;
+    cursor: pointer;
+    margin-left: auto;
+}
+.panel-google-plus > .panel-google-plus-tags > ul:hover > li {
+    background-color: rgb(255, 255, 255);   
+}
+.panel-google-plus > .panel-google-plus-tags > ul > li:hover {
+    background-color: rgb(66, 127, 237);
+    color: rgb(255, 255, 255);
+}
+.panel-google-plus > .panel-heading,
+.panel-google-plus > .panel-footer {
+    background-color: rgb(255, 255, 255);
+    border-width: 0px; 
+}
+.panel-google-plus > .panel-heading {
+    margin-top: 20px;    
+    padding-bottom: 5px; 
+}
+.panel-google-plus > .panel-heading > img { 
+    margin-right: 15px;
+}
+.panel-google-plus > .panel-heading > h3 {
+    margin: 0px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.panel-google-plus > .panel-heading > h5 {
+    color: rgb(153, 153, 153);
+    font-size: 12px;
+    font-weight: 400;
+}
+.panel-google-plus > .panel-body {
+    padding-top: 5px;
+    font-size: 13px;
+}
+.panel-google-plus > .panel-body > .panel-google-plus-image {
+    display: block;
+    text-align: center;
+    background-color: rgb(245, 245, 245);
+    border: 1px solid rgb(217, 217, 217);
+}
+.panel-google-plus > .panel-body > .panel-google-plus-image > img {
+    max-width: 100%;
+}
+
+.panel-google-plus > .panel-footer {
+    font-size: 14px;
+    font-weight: 700;
+    min-height: 54px;
+}
+.panel-google-plus > .panel-footer > .btn {
+    float: left;
+    margin-right: 8px;
+}
+.panel-google-plus > .panel-footer > .input-placeholder {
+    display: block;
+    margin-left: 98px;
+    color: rgb(153, 153, 153);
+    font-size: 12px;
+    font-weight: 400;
+    padding: 8px 6px 7px;
+    border: 1px solid rgb(217, 217, 217);
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.0470588) 0px 1px 0px 0px;
+}
+.panel-google-plus.panel-google-plus-show-comment > .panel-footer > .input-placeholder {
+    display: none;   
+}
+.panel-google-plus > .panel-google-plus-comment {
+    display: none;
+    padding: 10px 20px 15px;
+    border-top: 1px solid rgb(229, 229, 229);
+    background-color: rgb(245, 245, 245);
+}
+.panel-google-plus.panel-google-plus-show-comment > .panel-google-plus-comment {
+    display: block;
+}
+/*.panel-google-plus > .panel-google-plus-comment > img {
+    float: left;   
+}*/
+.panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea {
+    float: right;
+    width: calc(100% - 56px);
+}
+.panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > textarea {
+    display: block;
+    /*margin-left: 60px;
+    width: calc(100% - 56px);*/
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(217, 217, 217);
+    box-shadow: rgba(0, 0, 0, 0.0470588) 0px 1px 0px 0px;
+    resize: vertical;
+}
+.panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > .btn {
+    margin-top: 10px;
+    margin-right: 8px;
+    width: 100%;
+}
+@media (min-width: 992px) {
+    .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > .btn {
+        width: auto;
+    }    
+}
+
+
+.panel-google-plus .btn {
+    border-radius: 3px;   
+}
+.panel-google-plus .btn-default {
+    border: 1px solid rgb(217, 217, 217);
+    box-shadow: rgba(0, 0, 0, 0.0470588) 0px 1px 0px 0px;
+}
+.panel-google-plus .btn-default:hover, 
+.panel-google-plus .btn-default:focus, 
+.panel-google-plus .btn-default:active {
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(0, 0, 0);    
+}
+        </style>
         <!-- script styles -->
         <link rel="stylesheet" href="assets/beeStories/zuck.css">
         <link rel="stylesheet" href="assets/beeStories/skins/snapgram.css">
@@ -146,13 +504,21 @@ textarea,
   display: inline-block;
   width: calc(100vw - 72%);
 }
-.topbar .search-box .input-group * {
+.topbar .search-box .input-group *  {
   font-size: 12px;
   height: 25px;
-  border: 1px solid #fff;
+  border-radius: 20px;
   background: #fff;
   outline: 0;
 }
+.search-box{
+    width: 250px!important;
+}
+.search-box input[type=text]:focus{
+    background-color: #fafafa!important;
+    border-radius: 20px;
+}
+
 .topbar .search-box .input-group button {
   color: #7a7a7a;
   -webkit-transition: all ease 150ms;
@@ -162,15 +528,17 @@ textarea,
   color: #000;
 }
 .left-content {
-  left: 0;
+  left: 10px;
 }
 .left-content {
   position: fixed;
   top: 42px;
   bottom: 0;
-  width: 250px;
+  width: 300px;
   background: #e9ebee;
-  overflow: auto;
+  overflow: hidden;
+  
+    overflow-y: scroll;
 }
 .left-content .global-links {
   padding: 10px;
@@ -215,7 +583,7 @@ textarea,
   position: absolute;
   top: 42px;
   bottom: 0;
-  left: 400px;
+  left: 300px;
   right: 0;
   padding: 12px 7px;
   background: #e9ebee;
@@ -244,7 +612,7 @@ textarea,
 }
 .feed-content .recentcontainer .newpostheader li:last-child,
 .feed-content .recentcontainer .newpostfooter li:last-child {
-  float: rght;
+  float: right;
 }
 .feed-content .recentcontainer .newpostheader h4,
 .feed-content .recentcontainer .newpostfooter h4 {
@@ -539,10 +907,10 @@ textarea,
   position: fixed;
   top: 42px;
   bottom: 0;
-  width: 350px;
+  width: 450px;
   background: #e9ebee;
   right: 0;
-  width: 350px;
+  width: 450px;
   padding: 12px 7px;
   background: #e9ebee;
   overflow-x: auto;
@@ -580,39 +948,39 @@ textarea,
 }
 
 
-.right-content ul:nth-child(2) {
+.right-content ul:nth-child(3) {
   list-style: none;
   padding: 0;
   height: 50%;
   overflow: auto;
 }
-.right-content ul:nth-child(2) h4 {
+.right-content ul:nth-child(3) h4 {
   font-size: 12px;
   margin-top: 15px;
   color: #474747;
   text-transform: uppercase;
 }
-.right-content ul:nth-child(2) li {
+.right-content ul:nth-child(3) li {
   display: block;
   padding: 5px 5px 15px 5px;
   width: 100%;
   border-bottom: 1px solid #a3a3a3;
   cursor: pointer;
 }
-.right-content ul:nth-child(2) li a {
+.right-content ul:nth-child(3) li a {
   padding: 5px;
   font-size: 12px;
 }
-.right-content ul:nth-child(2) li img {
+.right-content ul:nth-child(3) li img {
   display: inline-block;
   width: 32px;
   height: 32px;
 }
-.right-content ul:nth-child(2) li b,
-.right-content ul:nth-child(2) li span {
+.right-content ul:nth-child(3) li b,
+.right-content ul:nth-child(3) li span {
   color: #000;
 }
-.right-content ul:nth-child(2) li span {
+.right-content ul:nth-child(3) li span {
   display: block;
   float: right;
   position: relative;
@@ -623,16 +991,16 @@ textarea,
   background: #fff;
   border: 1px solid #b8b8b8;
 }
-.right-content ul:nth-child(2) li .fa {
+.right-content ul:nth-child(3) li .fa {
   float: right;
   position: relative;
   top: 8px;
   color: #1f0;
 }
-.right-content ul:nth-child(2) li a:hover {
+.right-content ul:nth-child(3) li a:hover {
   text-decoration: none;
 }
-.right-content ul:nth-child(2) li:hover {
+.right-content ul:nth-child(3) li:hover {
   background: #ccc;
 }
 @media all and (max-width: 700px) {
@@ -688,7 +1056,16 @@ textarea,
 .tc {
   text-align: center;
 }
-
+.list-inlines {
+  padding-left: 0;
+  margin-left: -5px;
+  list-style: none;
+}
+.list-inlines > li {
+  display: inline-block;
+  padding-right: 5px;
+  padding-left: 5px;
+}
 
 </style>
 
@@ -699,11 +1076,9 @@ textarea,
                         <img src="assets/beeImage/beeLogo1.png" width="70px" height="30px" alt="">
   </a>
   <div class="search-box">
-    <div class="input-group">
-      <input aria-describedby="basic-addon2" class="form-control" placeholder="Search " type="text" />
-      <button class="input-group-addon pointer" id="basic-addon2" style="height:27px">
-        <i class="fa fa-search " ></i>
-      </button>
+    <div class="input-group ">
+      <input aria-describedby="basic-addon2" class="form-control cyan darken-3" placeholder="Search " type="text" />
+      
     </div>
   </div>
   <div class="right-group">
@@ -739,7 +1114,7 @@ textarea,
     </div>
   </div>
 </div>
-<div class="left-content">
+<div class="left-content" >
   <div class="global-links">
     <a href="javascript:void(0)">
       <img src="//i.imgur.com/5jInimY.jpg" /> First Last
@@ -755,396 +1130,186 @@ textarea,
       <img src="http://icons.iconarchive.com/icons/wineass/ios7-redesign/512/Messages-icon.png" /> Messenger
       <span class="counter">1</span>
     </a>
-    <div class="group-content">
-      <h4>shortcuts</h4>
-      <a href="javascript:void(0)">
-        <img src="http://theieltscoach.com/wp-content/uploads/2015/03/IELTS-Speaking-Tips-Icon-2.png" /> Group name
-        <span class="counter">1</span>
-      </a>
-      <a href="javascript:void(0)">
-        <img src="http://theieltscoach.com/wp-content/uploads/2015/03/IELTS-Speaking-Tips-Icon-2.png" /> Group name
-        <span class="counter">1</span>
-      </a>
-      <a href="javascript:void(0)">
-        <img src="http://theieltscoach.com/wp-content/uploads/2015/03/IELTS-Speaking-Tips-Icon-2.png" /> Group name
-        <span class="counter">1</span>
-      </a>
-      <a href="javascript:void(0)">
-        <img src="http://theieltscoach.com/wp-content/uploads/2015/03/IELTS-Speaking-Tips-Icon-2.png" /> Group name
-        <span class="counter">1</span>
-      </a>
-      <a href="javascript:void(0)">
-        <img src="http://theieltscoach.com/wp-content/uploads/2015/03/IELTS-Speaking-Tips-Icon-2.png" /> Group name
-        <span class="counter">1</span>
-      </a>
-      <a href="javascript:void(0)">
-        <i class="fa fa-caret-down"></i>
-        <span>See More...</span>
-      </a>
-    </div>
-    <div class="group-content">
-      <h4>explore</h4>
-      <a href="javascript:void(0)">
-        <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/calendar-icon.png" /> Events
-        <span class="counter">1</span>
-      </a>
-      <a href="javascript:void(0)">
-        <img src="http://image.flaticon.com/icons/png/512/223/223120.png" /> Saved
-        <span class="counter">1</span>
-      </a>
-      <a href="javascript:void(0)">
-        <img src="http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-13/512/Webpage-icon.png" /> Pages
-        <span class="counter">1</span>
-      </a>
-      <a href="javascript:void(0)">
-        <img src="https://www.iconfinder.com/data/icons/unique-round-blue/93/group-512.png" /> Groups
-        <span class="counter">1</span>
-      </a>
-      <a href="javascript:void(0)">
-        <img src="http://www.thesuccesswriter.com/images/fundraising.png" /> Fundraisers
-      <span class="counter">1</span>
-      </a>
-    <a href="javascript:void(0)">
-      <i class="fa fa-caret-down"></i>
-      <span>See More...</span>
-    </a>
-  </div>
-    <div class="group-content">
-      <h4>create</h4>
-      <a href="javascript:void(0)">
-        <img src="http://1agb93314bcf1knhv22id9u9.wpengine.netdna-cdn.com/wp-content/uploads/2015/02/Marketing_Advertising_Icon.png" /> Ad
-      </a>
-      <a href="javascript:void(0)">
-        <img src="http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-13/512/Webpage-icon.png" /> Page
-      </a>
-      <a href="javascript:void(0)">
-        <img src="https://www.iconfinder.com/data/icons/unique-round-blue/93/group-512.png" /> Group
-      </a>
-      <a href="javascript:void(0)">
-        <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/calendar-icon.png" /> Event
-      </a>
-      <a href="javascript:void(0)">
-        <img src="http://www.thesuccesswriter.com/images/fundraising.png" /> Fundraiser
-      </a>
-    </div>
+   
+   
+
   </div>
 </div>
 <div class="feed-content">
-  <div class="recentcontainer">
-    <ul class="newpostheader nav nav-tabs nav-justified">
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-pencil"></i>
-          <span>Create a Post</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-book"></i>
-          <span>Media Album</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-video-camera"></i>
-          <span>Live Video</span>
-        </a>
-      </li>
-    </ul>
-    <div class="newpost">
-      <textarea placeholder="Post Something..."></textarea>
-    </div>
-    <ul class="newpostfooter nav nav-tabs nav-justified">
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-picture-o"></i>
-          <span>Photo/Video</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-smile-o"></i>
-          <span>Feeling/Activity</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-ellipsis-h"></i>
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div class="recentcontainer">
-    <div class="newpostheader">
-      <a href="javascript:void(0)">
-        <img src="//i.imgur.com/5jInimY.jpg" />
-        <span class="name">First Last</span>
-      </a>
-      <span>shared <a href="javascript:void(0)">Demyos's</a> <a href="javascript:void(0)">post</a>.</span>
-      <p>
-        <a class="date" href="javascript:void(0)">44 mins</a>
-        <a href="javascript:void(0)">
-          <i class="fa fa-globe"></i>
-        </a>
-      <div class="rightsideofpost">
-        <a class="follow" href="javascript:void(0)">
-          <i class="fa fa-star"></i>
-        </a>
-        <a class="personpostmenu" href="javascript:void(0)">
-          <i class="fa fa-caret-down"></i>
-        </a>
-      </div>
-      </p>
-  </div>
-    <div class="newpost">
-      <div class="postcontent">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate sunt quasi in quam asperiores! Optio voluptate impedit eos ex nisi, molestias facilis sint cupiditate, dolores veritatis cum? Enim vel, qui!
-      </div>
-    </div>
-    <ul class="newpostfooter nav nav-tabs nav-justified">
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-thumbs-up"></i>
-          <span>Like</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)" title="Leave a comment">
-          <i class="fa fa-comment-o"></i>
-          <span>Comment</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)" title="Send this to friends or post it to your timeline">
-          <i class="fa fa-share"></i>
-          <span>Share</span>
-        </a>
-      </li>
-    </ul>
-    <ul class="community-counter nav nav-tabs nav-justified">
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-thumbs-up"></i>
-          <span>1</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-comment-o"></i>
-          <span>3</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-share"></i>
-          <span>4</span>
-        </a>
-      </li>
-    </ul>
-    <div class="commentpost">
-      <div class="input-group">
-        <a href="javascript:void(0)">
-          <img src="//i.imgur.com/5jInimY.jpg" />
-        </a>
+  
+    <div class="recentcontainer">
+       
 
-        <textarea class="form-control" placeholder="Write a comment..."></textarea>
-        <div class="input-group-btn">
-          <a class="btn btn-default" href="javascript:void(0)">
-            <i class="fa fa-smile-o"></i>
-          </a>
-          <a class="btn btn-default" href="javascript:void(0)">
-            <i class="fa fa-picture-o"></i>
-          </a>
-          <a class="btn btn-default" href="javascript:void(0)">
-            <i class="fa fa-gift"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="recentcontainer">
-    <div class="newpostheader">
-      <h4>
-        Suggested post
-      </h4>
-      <hr />
-      <a href="javascript:void(0)">
-        <img src="//i.imgur.com/5jInimY.jpg" />
-        <span class="name">First Last</span>
-      </a>
-      <p>
-        <a class="date" href="javascript:void(0)">Sponsored</a>
-        <a href="javascript:void(0)">
-          <i class="fa fa-globe"></i>
-        </a>
-      <div class="rightsideofpost">
-        <a class="follow" href="javascript:void(0)">
-          <i class="fa fa-star"></i>
-        </a>
-        <a class="personpostmenu" href="javascript:void(0)">
-          <i class="fa fa-caret-down"></i>
-        </a>
-      </div>
-      </p>
-  </div>
-    <div class="newpost">
-      <div class="postcontent">
-        We lose 48 football fields of forest every minute. :-(
-By using "<a href="https://ecosia.org">Ecosia.org</a>" for your web searches you can help stop this trend.
-Let's plant some trees together!
-        <div class="tc">
-          <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fecosia%2Fvideos%2F10154359809121611%2F&show_text=0&width=400" width="400" height="400" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-        </div>
-      </div>
-    </div>
-    <ul class="newpostfooter nav nav-tabs nav-justified">
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-thumbs-up"></i>
-          <span>Like</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)" title="Leave a comment">
-          <i class="fa fa-comment-o"></i>
-          <span>Comment</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)" title="Send this to friends or post it to your timeline">
-          <i class="fa fa-share"></i>
-          <span>Share</span>
-        </a>
-      </li>
-    </ul>
-    <ul class="community-counter nav nav-tabs nav-justified">
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-thumbs-up"></i>
-          <span>1</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-comment-o"></i>
-          <span>3</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-share"></i>
-          <span>4</span>
-        </a>
-      </li>
-    </ul>
-    <div class="commentpost">
-      <div class="input-group">
-        <a href="javascript:void(0)">
-          <img src="//i.imgur.com/5jInimY.jpg" />
-        </a>
 
-        <textarea class="form-control" placeholder="Write a comment..."></textarea>
-        <div class="input-group-btn">
-          <a class="btn btn-default" href="javascript:void(0)">
-            <i class="fa fa-smile-o"></i>
-          </a>
-          <a class="btn btn-default" href="javascript:void(0)">
-            <i class="fa fa-picture-o"></i>
-          </a>
-          <a class="btn btn-default" href="javascript:void(0)">
-            <i class="fa fa-gift"></i>
-          </a>
+    <div class="row">
+        <div class="[ col-xs-12  ]">
+            <div class="[ panel panel-default ] panel-google-plus">
+                <div class="dropdown">
+                    <span class="dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span class="[ glyphicon glyphicon-chevron-down ]"></span>
+                    </span>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+                <div class="panel-google-plus-tags">
+                    <ul>
+                        <li>#Millennials</li>
+                        <li>#Generation</li>
+                    </ul>
+                </div>
+                <div class="panel-heading">
+                    <img class="[ img-circle pull-left ]" src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg" alt="Mouse0270" />
+                    <h3>Robert McIntosh</h3>
+                    <h5><span>Shared publicly</span> - <span>Jun 27, 2014</span> </h5>
+                </div>
+                <div class="panel-body">
+                    <p>Do people born in 2000 get to choose if they are Generation Y or Generation Z? How do you decide what generation you want to belong to?</p>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="[ btn btn-default ]">+1</button>
+                    
+                    <button type="button" class="[ btn btn-default ]">
+                        <span class="[ glyphicon glyphicon-share-alt ]"></span>
+                    </button>
+                    <div class="input-placeholder">Add a comment...</div>
+                </div>
+                <div class="panel-google-plus-comment">
+                    <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" />
+                    <div class="panel-google-plus-textarea">
+                        <textarea rows="4"></textarea>
+                        <button type="submit" class="[ btn btn-success disabled ]">Post comment</button>
+                        <button type="reset" class="[ btn btn-default ]">Cancel</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
         </div>
-      </div>
+        
+       
     </div>
-  </div>
-  <div class="recentcontainer">
-    <div class="newpostheader">
-      <a href="javascript:void(0)">
-        <img src="//i.imgur.com/5jInimY.jpg" />
-        <span class="name">First Last</span>
-      </a>
-      <p>
-        <a class="date" href="javascript:void(0)">44 mins</a>
-        <a href="javascript:void(0)">
-          <i class="fa fa-globe"></i>
-        </a>
-      <div class="rightsideofpost">
-        <a class="follow" href="javascript:void(0)">
-          <i class="fa fa-star"></i>
-        </a>
-        <a class="personpostmenu" href="javascript:void(0)">
-          <i class="fa fa-caret-down"></i>
-        </a>
-      </div>
-      </p>
-  </div>
-    <div class="newpost">
-      <div class="postcontent">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate sunt quasi in quam asperiores! Optio voluptate impedit eos ex nisi, molestias facilis sint cupiditate, dolores veritatis cum? Enim vel, qui!
-      </div>
-    </div>
-    <ul class="newpostfooter nav nav-tabs nav-justified">
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-thumbs-up"></i>
-          <span>Like</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)" title="Leave a comment">
-          <i class="fa fa-comment-o"></i>
-          <span>Comment</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)" title="Send this to friends or post it to your timeline">
-          <i class="fa fa-share"></i>
-          <span>Share</span>
-        </a>
-      </li>
-    </ul>
-    <ul class="community-counter nav nav-tabs nav-justified">
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-thumbs-up"></i>
-          <span>1</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-comment-o"></i>
-          <span>3</span>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-share"></i>
-          <span>4</span>
-        </a>
-      </li>
-    </ul>
-    <div class="commentpost">
-      <div class="input-group">
-        <a href="javascript:void(0)">
-          <img src="//i.imgur.com/5jInimY.jpg" />
-        </a>
+    <div class="row">
+        <div class="[ col-xs-12  ]">
+            <div class="[ panel panel-default ] panel-google-plus">
+                <div class="dropdown">
+                    <span class="dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span class="[ glyphicon glyphicon-chevron-down ]"></span>
+                    </span>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+                <div class="panel-google-plus-tags">
+                    <ul>
+                        <li>#Millennials</li>
+                        <li>#Generation</li>
+                    </ul>
+                </div>
+                <div class="panel-heading">
+                    <img class="[ img-circle pull-left ]" src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg" alt="Mouse0270" />
+                    <h3>Robert McIntosh</h3>
+                    <h5><span>Shared publicly</span> - <span>Jun 27, 2014</span> </h5>
+                </div>
+                <div class="panel-body">
+                    <p>Just created a new snippet inspired by the Svbtle Menu. Find it here: <a href="http://bootsnipp.com/snippets/MaWrA">http://bootsnipp.com/snippets/MaWrA</a></p>
+                  
+                    <img class="panel-google-plus-image" src="https://lh4.googleusercontent.com/-6oO7re5XALY/U6ssH6ijb_I/AAAAAAAAARQ/CeqYilQH7dI/w426-h428/svbtle-inspired-menu.PNG" width="100%"/>
+                    
+                </div>
 
-        <textarea class="form-control" placeholder="Write a comment..."></textarea>
-        <div class="input-group-btn">
-          <a class="btn btn-default" href="javascript:void(0)">
-            <i class="fa fa-smile-o"></i>
-          </a>
-          <a class="btn btn-default" href="javascript:void(0)">
-            <i class="fa fa-picture-o"></i>
-          </a>
-          <a class="btn btn-default" href="javascript:void(0)">
-            <i class="fa fa-gift"></i>
-          </a>
+                <div class="panel-footer">
+                    <button type="button" class="[ btn btn-default ]">+1</button>
+                    
+                    <button type="button" class="[ btn btn-default ]">
+                        <span class="[ glyphicon glyphicon-share-alt ]"></span>
+                    </button>
+                    <div class="input-placeholder">Add a comment...</div>
+                </div>
+                <div class="panel-google-plus-comment">
+                    <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" />
+                    <div class="panel-google-plus-textarea">
+                        <textarea rows="4"></textarea>
+                        <button type="submit" class="[ btn btn-success disabled ]">Post comment</button>
+                        <button type="reset" class="[ btn btn-default ]">Cancel</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
         </div>
-      </div>
+        
+       
     </div>
-  </div>
+     <div class="row">
+        <div class="[ col-xs-12  ]">
+            <div class="[ panel panel-default ] panel-google-plus">
+                <div class="dropdown">
+                    <span class="dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span class="[ glyphicon glyphicon-chevron-down ]"></span>
+                    </span>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+                <div class="panel-google-plus-tags">
+                    <ul>
+                        <li>#Millennials</li>
+                        <li>#Generation</li>
+                    </ul>
+                </div>
+                <div class="panel-heading">
+                    <img class="[ img-circle pull-left ]" src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg" alt="Mouse0270" />
+                    <h3>Robert McIntosh</h3>
+                    <h5><span>Shared publicly</span> - <span>Jun 27, 2014</span> </h5>
+                </div>
+                <div class="panel-body">
+                    <div id="instructions">
+
+                        <video id="my_video_1" class="video-js vjs-default-skin panel-google-plus-image" width="100%" height="400px"
+                            controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                            data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
+                          <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4' />
+                          <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
+                        </video>
+
+                    
+                </div>
+
+                <div class="panel-footer" margin-top="50px">
+                    <button type="button" class="[ btn btn-default ]">+1</button>
+                    
+                    <button type="button" class="[ btn btn-default ]">
+                        <span class="[ glyphicon glyphicon-share-alt ]"></span>
+                    </button>
+                    <div class="input-placeholder">Add a comment...</div>
+                </div>
+                <div class="panel-google-plus-comment">
+                    <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" />
+                    <div class="panel-google-plus-textarea">
+                        <textarea rows="4"></textarea>
+                        <button type="submit" class="[ btn btn-success disabled ]">Post comment</button>
+                        <button type="reset" class="[ btn btn-default ]">Cancel</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        
+       
+    </div>
+    </div>
+  
 </div>
 
 <div class="right-content">
@@ -1155,6 +1320,70 @@ Let's plant some trees together!
         </li>
         
     </ul> 
+    <ul>
+        <li style="position: absolute;top: 140px;">
+            <div class="row" >
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-image">
+ <div class="carousel carousel-slider center" data-indicators="true">
+    <div class="carousel-fixed-item center">
+      
+        <a class="btn waves-effect white grey-text darken-text-2" style="top:40px!important;">button</a>
+    </div>
+    <div class="carousel-item red white-text" href="#one!">
+                      <div class="profile-usertitle-name"> MATH-2202 </div>
+
+      <div ><div class="circles" style="background-image: 
+        url('https://img.labnol.org/di/bo.jpg')"><p class="class-card-pro-name" style="margin-left:50px;">Beesir</p></div>
+        
+</div>
+      
+
+     <div class="card-content" style="margin:0px!important;padding;0px!important;top:2px!important;">
+              <p>I am a very simple card. I am good at containing small bits of information.
+              I am convenient because I require </p>
+       <p style="display: inline-block;" class="waves-effect waves-light tag">class starting time: 2:12:90</p>
+       <span class="tag waves-effect waves-light">Room: room212</span>
+            </div>
+            <div class="">
+              <ul class="list-inlines " >
+  <li class=" tag card-tag-list waves-effect waves-light" >Assignment: bee</li>
+  <li  class=" tag card-tag-list waves-effect waves-light">Class test: </li>
+  <li  class="waves-effect waves-light tag card-tag-list">Item 3 fhj hgjgjh</li>
+</ul>
+            </div>
+    </div>
+
+    <div class="carousel-item amber white-text" href="#two!">
+      <h2>Second Panel</h2>
+      <p class="white-text">This is your second panel</p>
+    </div>
+    <div class="carousel-item amber white-text" href="#two!">
+      <h2>Second Panel</h2>
+      <p class="white-text">This is your second panel</p>
+    </div>
+    <div class="carousel-item green white-text" href="#three!">
+      <h2>Third Panel</h2>
+      <p class="white-text">This is your third panel</p>
+    </div>
+    <div class="carousel-item blue white-text" href="#four!">
+      <h2>Fourth Panel</h2>
+      <div class="card-content">
+              <p>I am a very simple card. I am good at containing small bits of information.
+              I am convenient because I require little markup to use effectively.</p>
+            </div>
+
+    </div>
+  </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+        </li>
+    </ul>
   <ul>
     <h4>Your Pages</h4>
     <li>
@@ -1208,7 +1437,10 @@ Let's plant some trees together!
     </li>
   </ul>
 </div>
-
+    
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="assets/beeStories/zuck.js"></script>
          <script>
             function buildItem(id, type, length, src, preview, link, linkText, seen, time){
@@ -1364,6 +1596,60 @@ Let's plant some trees together!
 			
 			initDemo();
         </script>
+ <script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="assets/js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+         <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js'></script>
 
+<script>
+    $(function(){
+  var $refreshButton = $('#refresh');
+  var $results = $('#css_result');
+  
+  function refresh(){
+    var css = $('style.cp-pen-styles').text();
+    $results.html(css);
+  }
+
+  refresh();
+  $refreshButton.click(refresh);
+  
+  // Select all the contents when clicked
+  $results.click(function(){
+    $(this).select();
+  });
+});
+
+    </script>
+<script>
+    $(function () {
+   $('.panel-google-plus > .panel-footer > .input-placeholder, .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > button[type="reset"]').on('click', function(event) {
+        var $panel = $(this).closest('.panel-google-plus');
+            $comment = $panel.find('.panel-google-plus-comment');
+            
+        $comment.find('.btn:first-child').addClass('disabled');
+        $comment.find('textarea').val('');
+        
+        $panel.toggleClass('panel-google-plus-show-comment');
+        
+        if ($panel.hasClass('panel-google-plus-show-comment')) {
+            $comment.find('textarea').focus();
+        }
+   });
+   $('.panel-google-plus-comment > .panel-google-plus-textarea > textarea').on('keyup', function(event) {
+        var $comment = $(this).closest('.panel-google-plus-comment');
+        
+        $comment.find('button[type="submit"]').addClass('disabled');
+        if ($(this).val().length >= 1) {
+            $comment.find('button[type="submit"]').removeClass('disabled');
+        }
+   });
+});
+</script>
+  <script src="https://vjs.zencdn.net/7.0.3/video.js"></script>
+<script  src="assets/js/index.js"></script>
 </body>
 </html>
