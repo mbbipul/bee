@@ -27,6 +27,10 @@
   <script src="http://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
       <link rel="stylesheet" href="assets/css/beeCard.css">
         <style>
+            .bee-user-nav-pic{
+                height: 30px!important;
+                width: 30px!important;
+            }
 	.bee-margin-left-24{
     margin-left:24px!important;
 }
@@ -234,8 +238,8 @@
     height: 100px!important;
 }
 .class-card-pro-name{
-    top: 10px;
-    padding-left: 40px;
+    top: 60px;
+    padding-left: 0px;
     position: absolute;
     font-size: 25px;
     font-weight: 600;
@@ -500,6 +504,9 @@ textarea,
   margin-left: 16px;
   border-left: 1px solid #355485;
 }
+.right-group{
+   margin-right: 200px!important;
+}
 .topbar .search-box {
   display: inline-block;
   width: calc(100vw - 72%);
@@ -579,7 +586,7 @@ textarea,
   margin-right: 12px;
 }
 .feed-content {
-    width: 550px;
+    width: 620px;
   position: absolute;
   top: 42px;
   bottom: 0;
@@ -1066,7 +1073,21 @@ textarea,
   padding-right: 5px;
   padding-left: 5px;
 }
+.global-links{
+    margin-top: 20px!important;
+    margin-left: 90px!important;
 
+}
+.noUnderline{
+     text-decoration: none!important;
+     margin-bottom: 10px;
+     
+}
+.noUnderline:hover{
+    border: 1px solid whitesmoke;
+    background-color: #e0e0e0 ;
+    z-index: 5!important;
+}
 </style>
 
 </head>
@@ -1084,11 +1105,20 @@ textarea,
   <div class="right-group">
     <div class="link-group">
       <a href="javascript:void(0)">
-        <img src="//i.imgur.com/5jInimY.jpg">Michael
+          <img class="img-circle bee-user-nav-pic" src="assets/img/IMG_20171205_122322.jpg">bee
       </a>
     </div>
     <div class="link-group">
       <a href="javascript:void(0)">Home</a>
+    </div>
+    <div class="link-group">
+        <a href=""><b>Class Management</b></a>
+    </div>
+    <div class="link-group">
+      <a href="">My Dairy</a>
+    </div>
+      <div class="link-group">
+      <a href="javascript:void(0)">Take Part</a>
     </div>
     <div class="notification-group">
       <div class="link-group">
@@ -1106,31 +1136,54 @@ textarea,
           <i class="fa fa-globe"></i>
         </a>
       </div>
-      <div class="link-group">
-        <a class="helpguide" href="javascript:void(0)">
-          <i class="fa fa-question-circle"></i>
-        </a>
-      </div>
+
     </div>
   </div>
 </div>
 <div class="left-content" >
   <div class="global-links">
-    <a href="javascript:void(0)">
-      <img src="//i.imgur.com/5jInimY.jpg" /> First Last
-      <span class="counter">1</span>
+      <a class="noUnderline" href="javascript:void(0)" >
+        <img class="img-circle" src="assets/img/IMG_20171205_122322.jpg"> bee bee
+      
     </a>
-    <a class="activepage" href="javascript:void(0)">
-      <img src="http://brassnecktheatre.com/wp-content/uploads/2013/11/news-icon.png" /> News Feed
-      <span class="counter">
-        <i class="fa fa-ellipsis-h"></i>
-      </span>
+    <a class="noUnderline" href="javascript:void(0)">
+      <img src="https://png.icons8.com/ios/2x/activity-feed-2.png" /> News Feed
+      
     </a>
-    <a href="javascript:void(0)">
-      <img src="http://icons.iconarchive.com/icons/wineass/ios7-redesign/512/Messages-icon.png" /> Messenger
-      <span class="counter">1</span>
+      <a class="noUnderline" href="javascript:void(0)">
+      <img src="https://png.icons8.com/ios/2x/chat.png" /> Chat Box
+     
+    </a>
+       </a>
+      <a class="noUnderline " href="">
+      <img src="https://png.icons8.com/ios/2x/groups.png" /> Find Friends
+     
+    </a>
+   <a class="noUnderline" href="">
+      <img src="https://png.icons8.com/ios/2x/collaboration.png" /> Take Part
+     
+    </a>
+   <a class="noUnderline" href="">
+      <img src="https://png.icons8.com/ios/2x/todo-list-filled.png" /> My Dairy
+     
+    </a>
+   <a class="noUnderline" href="">
+      <img src="https://png.icons8.com/ios/2x/selfie.png" /> Selfie Event
+     
+    </a>
+   <a class="noUnderline" href="">
+      <img src="https://png.icons8.com/ios/1600/google-photos.png" /> Photos
+     
     </a>
    
+   <a class="noUnderline" href="">
+      <img src="https://png.icons8.com/ios/2x/musical-notes-filled.png" /> Musics
+     
+    </a>
+   <a class="noUnderline" href="">
+      <img src="https://png.icons8.com/ios/2x/movies-folder.png" /> Videos
+     
+    </a>
    
 
   </div>
@@ -1335,7 +1388,7 @@ textarea,
                       <div class="profile-usertitle-name"> MATH-2202 </div>
 
       <div ><div class="circles" style="background-image: 
-        url('https://img.labnol.org/di/bo.jpg')"><p class="class-card-pro-name" style="margin-left:50px;">Beesir</p></div>
+        url('assets/img/IMG_20171205_122322.jpg')"><p class="class-card-pro-name" style="margin-left:50px;">Beesir</p></div>
         
 </div>
       
