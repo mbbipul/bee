@@ -19,8 +19,8 @@ class FUNCTIONS {
     public function is_email_exist($email)
     {
         global $conn;
-        $table = "user";
-        $sql = "select id from $table where email = ?";
+        $table = "users";
+        $sql = "select userId from $table where loginUserEmail = ?";
         $query = $conn->prepare($sql);
         $query->bindParam(1,$email);
         $query->execute();
@@ -41,22 +41,20 @@ class FUNCTIONS {
         if(!($this->is_email_exist($email)))
         {
                 $fname = ucwords(strtolower(trim($_POST['firstname'])));
-                $mname = ucwords(strtolower(trim($_POST['middlename'])));
                 $lname = ucwords(strtolower(trim($_POST['lastname'])));
                 $sex = $_POST['sex'];
                 $password =  sha1($_POST['password']);
+                $dob = $_POST['userDob'];
                 global $conn;
-                $table = 'user';
-                $sql = "insert into $table (first_name,middle_name,last_name,email,password,joining_time_stamp,sex) values(?,?,?,?,?,?,?)";
+                $table = 'users';
+                $sql = "insert into $table (loginUserEmail,loginPassword,userFirstName,userTitle,userGender,userDob) values(?,?,?,?,?,?)";
                 $query = $conn->prepare($sql);
-                $query->bindParam(1, $fname);
-                $query->bindParam(2, $mname);
-                $query->bindParam(3, $lname);
-                $query->bindParam(4, $email);
-                $query->bindParam(5, $password);
-                $time = time();
-                $query->bindParam(6, $time);
-                $query->bindParam(7, $sex);
+                $query->bindParam(1, $email);
+                $query->bindParam(2, $password);
+                $query->bindParam(3, $fname);
+                $query->bindParam(4, $lname);
+                $query->bindParam(5, $sex);
+                $query->bindParam(6, $dob);
 
                 if($query->execute())
                     {       $user_id_may_be=$conn->lastInsertId();
@@ -71,7 +69,7 @@ class FUNCTIONS {
         }
         else
         {
-            echo '<h1 style="color:red;">Try again. <a href="http://localhost/bee" class="btn btn-danger">Reload</a></h1>';
+            echo '<h1 style="color:red;">Try again. <a href="http://localhost/bee/bee.php" class="btn btn-danger">Reload</a></h1>';
         }
     }
 
@@ -79,7 +77,7 @@ class FUNCTIONS {
     {
         global $conn;
         $email = $A;;
-         $password =  $B;
+        $password =  $B;
         if(isset($_POST['special_key']) && !isset($_COOKIE['A']) && !isset($_COOKIE['B']))
         {
                 if($_POST['special_key']=="on")
@@ -93,23 +91,23 @@ class FUNCTIONS {
         if(!empty($_POST['loginPassword']))
         {
 
-            $table = "user";
-            $sql = "select id, password from $table where email = ?";
+            $table = "users";
+            $sql = "select userId, loginPassword from $table where loginUserEmail = ?";
             $query = $conn->prepare($sql);
             $query->bindParam(1,$email);
             $query->execute();
             if($query->rowCount()>0)
             {
                 $database_result  = $query->fetchObject();
-                if($password == ($database_result->password))
+                if($password == ($database_result->loginPassword))
                 {
                     //login true
                     session_start();
-                    $_SESSION['id'] = $database_result->id;
+                    $_SESSION['userId'] = $database_result->userId;
                      $conn=null;
                     ?>
 	<script>
-		window.location.href = 'http://localhost/bee/home.php';
+		window.location.href = 'http://localhost/bee/bee.php';
 	</script>
 	<?php
                     exit;

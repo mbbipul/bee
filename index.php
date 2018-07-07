@@ -2,7 +2,6 @@
 if(isset($_SESSION['id']))
 {
   header("Location: home.php");
-  exit();
 }
 if(isset($_COOKIE['A']) && isset($_COOKIE['B']))
    {
@@ -23,15 +22,25 @@ if(isset($_COOKIE['A']) && isset($_COOKIE['B']))
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 		<meta name="description" content="">
 		
-		<link rel="icon" href="beeImage/beeLogo1.png">
+		<link rel="icon" href="img/favicon.ico">
 
 		<title>bee</title>
 
+		<!-- Bootstrap core CSS -->
                 <link href="assets/css/bootstrap_2.css" rel="stylesheet">
 
+		<!-- Custom styles for this template -->
                 <link href="assets/css/cover.css" rel="stylesheet">
 
-		
+		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+		<script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 		<style>
 			#btn-env:hover {
 				color: #10ad9d;
@@ -99,7 +108,7 @@ if(isset($_COOKIE['A']) && isset($_COOKIE['B']))
 						<img src="img/loader.gif" id="loader" height="25%" style="position: fixed;margin: 0 auto;z-index: 400;">
 
 
-						<form class="form-horizontal" method="post" action="php/signup.php" id="sign_up_form">
+                                                <form class="form-horizontal" method="post" action="assets/beeClasses/signup.php" id="sign_up_form">
 							<br>
 							<h1 class="cover-heading">Create Account
                    
@@ -130,6 +139,10 @@ if(isset($_COOKIE['A']) && isset($_COOKIE['B']))
 										<input type="radio" name="sex" id="sex2" value="female" checked="checked" required> <b>Girl</b>
 									</label>
 								</div>
+                                                                <div class="col-sm-6">
+                                                                    <input type="date" name="userDob" class="form-control" required="required">
+                                                                </div>
+                                                                
 							</div>
 
 							<div class="form-group">
@@ -147,11 +160,12 @@ if(isset($_COOKIE['A']) && isset($_COOKIE['B']))
 
 						</form>
 						<br>
+						<span data-toggle="modal" data-target="#notice" type="button" style="cursor: pointer;" id="btn-env">Read Rules </span>
 					</div>
 					<div class="inner cover bar" id="login" style="font-size: larger">
 						<br>
 						<h1 class="cover-heading">Sign In</h1>
-						<form class="form-horizontal" method="post" id="login_form">
+                                                <form class="form-horizontal" method="post" id="login_form" action="assets/beeClasses/login.php">
 							<div class="form-group">
 
 								<div class="col-sm-12">
@@ -195,7 +209,7 @@ if(isset($_COOKIE['A']) && isset($_COOKIE['B']))
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
                 <script src="assets/js/jquery.js"></script>
-                <script src="assets/js/bootstrap.min.js"></script>
+                <script src="assets/js/bootstrap.min_2.js"></script>
 		<script>
 			var loader = $('#loader');
 			loader.hide();
@@ -247,7 +261,7 @@ if(isset($_COOKIE['A']) && isset($_COOKIE['B']))
 					$('#email-info').html('<span class="bg-info" style="color:black; padding:3px;">Please provide your email id</span>');
 					return false;
 				} else {
-					$.post('php/email_check.php', {
+					$.post('assets/beeClasses/email_check.php', {
 						'signupEmail': email
 					}, function(data) {
 						$('#email-info').html(data);
@@ -268,7 +282,7 @@ if(isset($_COOKIE['A']) && isset($_COOKIE['B']))
 						loader.show();
 						var d = $('#sign_up_form').serialize();
 						$.ajax({
-							url: "php/signup.php",
+							url: "assets/beeClasses/signup.php",
 							method: "POST",
 							data: d,
 							success: function(data) {
@@ -294,7 +308,7 @@ if(isset($_COOKIE['A']) && isset($_COOKIE['B']))
 				var logdata = $('#login_form').serialize();
 
 				$.ajax({
-					url: 'php/login.php',
+					url: 'assets/beeClasses/login.php',
 					method: "post",
 					data: logdata,
 					success: function(data) {
