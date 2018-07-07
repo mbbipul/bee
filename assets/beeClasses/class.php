@@ -527,23 +527,23 @@ class FUNCTIONS {
         global $conn;
             $email=$A;
             $password=$B;
-            $table = "user";
-            $sql = "select id, password from $table where email = ?";
+            $table = "users";
+            $sql = "select userId, loginPassword from $table where loginUserEmail = ?";
             $query = $conn->prepare($sql);
             $query->bindParam(1,$email);
             $query->execute();
             if($query->rowCount()>0)
             {
                 $database_result  = $query->fetchObject();
-                if($password == ($database_result->password))
+                if($password == ($database_result->loginPassword))
                 {
                     //login true
                     session_start();
-                    $_SESSION['id'] = $database_result->id;
+                    $_SESSION['id'] = $database_result->userId;
 
                     ?>
 			<script>
-				window.location.href = 'http://localhost/bee/home.php';
+				window.location.href = 'http://localhost/bee/bee.php';
 			</script>
 			<?php
                     exit;
