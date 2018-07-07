@@ -2,6 +2,7 @@
 if(isset($_SESSION['id']))
 {
   header("Location: home.php");
+  exit();
 }
 if(isset($_COOKIE['A']) && isset($_COOKIE['B']))
    {
