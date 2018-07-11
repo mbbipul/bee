@@ -1,19 +1,21 @@
 
-
+<?php
+    include 'beePosts/includes/config.php';
+    include 'beePosts/includes/smileys.php';   
+?>
 <!DOCTYPE html><html lang='en' class=''>
 <head>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="remote/netdna.bootstrapcdn.com_bootstrap_3.0.0_css_bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="remote/netdna.bootstrapcdn.com_bootstrap_3.0.0_js_bootstrap.min.js"></script>
+    <script src="remote/code.jquery.com_jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"  />
+        <link type="text/css" rel="stylesheet" href="remote/cdnjs.cloudflare.com_ajax_libs_materialize_0.98.0_css_materialize.min.css"  />
         <!--import w3css -->
         <!--Import bootstrap-->
         <link type="text/css" rel="stylesheet" href="assets/css/bee.css"  />
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="remote/maxcdn.bootstrapcdn.com_font-awesome_4.6.0_css_font-awesome.min.css">
         <!-- Bootstrap core CSS -->
 
   <!-- styles just for demo -->
@@ -21,11 +23,19 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
         <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css'>
          <!--Video player-->
-        <link href="https://vjs.zencdn.net/7.0.3/video-js.css" rel="stylesheet">
+         <link href="remote/vjs.zencdn.net_7.0.3_video-js.css" rel="stylesheet">
 
   <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-  <script src="http://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+  <script src="remote/vjs.zencdn.net_ie8_ie8-version_videojs-ie8.min.js"></script>
       <link rel="stylesheet" href="assets/css/beeCard.css">
+     <link href="<?php echo $base_url;?>assets/stylesheets/normalize.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo $base_url;?>assets/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo $base_url;?>assets/stylesheets/timeline.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo $base_url;?>ass/stylesheets/fb-buttons.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo $base_url;?>assets/stylesheets/comments.css" media="screen" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.msg_image img {border: 2px solid #ccc; height: 100%;}
+</style>
         <style>
             .bee-user-nav-pic{
                 height: 30px!important;
@@ -1431,6 +1441,273 @@ img {
     position: relative;
 }
 </style>
+
+<style class="cp-pen-styles">/**
+ * Oscuro: #283035
+ * Azul: #03658c
+ * Detalle: #c7cacb
+ * Fondo: #dee1e3
+ ----------------------------------*/
+ * {
+ 	margin: 0;
+ 	padding: 0;
+ 	-webkit-box-sizing: border-box;
+ 	-moz-box-sizing: border-box;
+ 	box-sizing: border-box;
+ }
+
+ a {
+ 	color: #03658c;
+ 	text-decoration: none;
+ }
+
+ul {
+	list-style-type: none;
+}
+
+body {
+	font-family: 'Roboto', Arial, Helvetica, Sans-serif, Verdana;
+	background: #dee1e3;
+}
+
+/** ====================
+ * Lista de Comentarios
+ =======================*/
+.comments-container {
+	margin: 60px auto 15px;
+	width: 768px;
+}
+
+.comments-container h1 {
+	font-size: 36px;
+	color: #283035;
+	font-weight: 400;
+}
+
+.comments-container h1 a {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.comments-list {
+	margin-top: 30px;
+	position: relative;
+}
+
+/**
+ * Lineas / Detalles
+ -----------------------*/
+.comments-list:before {
+	content: '';
+	width: 2px;
+	height: 100%;
+	background: #c7cacb;
+	position: absolute;
+	left: 32px;
+	top: 0;
+}
+
+.comments-list:after {
+	content: '';
+	position: absolute;
+	background: #c7cacb;
+	bottom: 0;
+	left: 27px;
+	width: 7px;
+	height: 7px;
+	border: 3px solid #dee1e3;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+}
+
+.reply-list:before, .reply-list:after {display: none;}
+.reply-list li:before {
+	content: '';
+	width: 60px;
+	height: 2px;
+	background: #c7cacb;
+	position: absolute;
+	top: 25px;
+	left: -55px;
+}
+
+
+.comments-list li {
+	margin-bottom: 15px;
+	display: block;
+	position: relative;
+}
+
+.comments-list li:after {
+	content: '';
+	display: block;
+	clear: both;
+	height: 0;
+	width: 0;
+}
+
+.reply-list {
+	padding-left: 88px;
+	clear: both;
+	margin-top: 15px;
+}
+/**
+ * Avatar
+ ---------------------------*/
+.comments-list .comment-avatar {
+	width: 65px;
+	height: 65px;
+	position: relative;
+	z-index: 99;
+	float: left;
+	border: 3px solid #FFF;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+	overflow: hidden;
+}
+
+.comments-list .comment-avatar img {
+	width: 100%;
+	height: 100%;
+}
+
+.reply-list .comment-avatar {
+	width: 50px;
+	height: 50px;
+}
+
+.comment-main-level:after {
+	content: '';
+	width: 0;
+	height: 0;
+	display: block;
+	clear: both;
+}
+/**
+ * Caja del Comentario
+ ---------------------------*/
+.comments-list .comment-box {
+	width: 680px;
+	float: right;
+	position: relative;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+	box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+}
+
+.comments-list .comment-box:before, .comments-list .comment-box:after {
+	content: '';
+	height: 0;
+	width: 0;
+	position: absolute;
+	display: block;
+	border-width: 10px 12px 10px 0;
+	border-style: solid;
+	border-color: transparent #FCFCFC;
+	top: 8px;
+	left: -11px;
+}
+
+.comments-list .comment-box:before {
+	border-width: 11px 13px 11px 0;
+	border-color: transparent rgba(0,0,0,0.05);
+	left: -12px;
+}
+
+.reply-list .comment-box {
+	width: 610px;
+}
+.comment-box .comment-head {
+	background: #FCFCFC;
+	padding: 10px 12px;
+	border-bottom: 1px solid #E5E5E5;
+	overflow: hidden;
+	-webkit-border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+}
+
+.comment-box .comment-head i {
+	float: right;
+	margin-left: 14px;
+	position: relative;
+	top: 2px;
+	color: #A6A6A6;
+	cursor: pointer;
+	-webkit-transition: color 0.3s ease;
+	-o-transition: color 0.3s ease;
+	transition: color 0.3s ease;
+}
+
+.comment-box .comment-head i:hover {
+	color: #03658c;
+}
+
+.comment-box .comment-name {
+	color: #283035;
+	font-size: 14px;
+	font-weight: 700;
+	float: left;
+	margin-right: 10px;
+}
+
+.comment-box .comment-name a {
+	color: #283035;
+}
+
+.comment-box .comment-head span {
+	float: left;
+	color: #999;
+	font-size: 13px;
+	position: relative;
+	top: 1px;
+}
+
+.comment-box .comment-content {
+	background: #FFF;
+	padding: 12px;
+	font-size: 15px;
+	color: #595959;
+	-webkit-border-radius: 0 0 4px 4px;
+	-moz-border-radius: 0 0 4px 4px;
+	border-radius: 0 0 4px 4px;
+}
+
+.comment-box .comment-name.by-author, .comment-box .comment-name.by-author a {color: #03658c;}
+.comment-box .comment-name.by-author:after {
+	content: 'autor';
+	background: #03658c;
+	color: #FFF;
+	font-size: 12px;
+	padding: 3px 5px;
+	font-weight: 700;
+	margin-left: 10px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+/** =====================
+ * Responsive
+ ========================*/
+@media only screen and (max-width: 766px) {
+	.comments-container {
+		width: 480px;
+	}
+
+	.comments-list .comment-box {
+		width: 390px;
+	}
+
+	.reply-list .comment-box {
+		width: 320px;
+	}
+}</style>
 </head>
 <body>
 <div class="topbar cyan darken-4 navbar-fixed">
@@ -1532,9 +1809,153 @@ img {
 <div class="feed-content">
   
     <div class="recentcontainer">
+       <div class="unit" id="tabs">
+        <ul class="actions">
+          <li><a href="#tabs-1"><i class="icon icon-status"></i>Status</a></li>
+          <li><a href="#tabs-2"><i class="icon icon-photo"></i>Add Picture</a></li>
+          <li><a href="#tabs-3"><i class="icon icon-video"></i>Add Video</a></li>
+         
+        </ul>
+        <span class="ajax_indi"><img src="<?php echo $base_url;?>assets/images/loader.gif"></span>
+        <!-- Units -->
+        <div class="actionUnits" id="tabs-1">
+         <form id="npost" name="npost">
+          <p class="formUnit" id="Status"> <i class="active"></i>
+            <textarea name="message" placeholder="What's on your mind?" id="message" cols="30" rows="3"></textarea>
+          <ol class="controls clearfix">
+            <li class="post">
+              <input class="uibutton confirm   btn waves-effect waves-light  cyan darken-4" type="button" title="npost" value="Post">
+            </li>
+          </ol>
+          </p>
+          </form>
+        </div>
+        <div class="actionUnits" id="tabs-2">
+         <form id="picpost" name="picpost">
+          <p class="formUnit"> <i class="active_pic"></i>
+            <textarea name="message" placeholder="What's on your mind?" id="pmessage" cols="30" rows="3"></textarea>
+            <input type="hidden" name="pic_url" id="pic_url">
+            <button class="uibutton  btn waves-effect waves-light  cyan darken-4" type="button" id="upload_pic">Upload Picture</button><span id="statuss"></span>
+          <ol class="controls clearfix">
+            <li class="post">
+              <input class="uibutton confirm fb_submit  btn waves-effect waves-light  cyan darken-4"  type="button" value="Post" title="picpost">
+            </li>
+          </ol>
+          </p>
+          <p id="files"></p>
+          </form>
+        </div>
+        <div class="actionUnits" id="tabs-3">
+         <form id="vidpost" name="vidpost">
+          <p class="formUnit" id="Status"> <i class="active_vid"></i>
+            <textarea name="message" placeholder="Video Description" id="vmessage" cols="30" rows="3"></textarea>
+            <input type="text" name="y_link" style="width:100%" id="y_link" placeholder="Enter Youtube Url - www.youtube.com/watch?v=rdmycu13Png">
+          <ol class="controls clearfix">
+            <li class="post">
+              <input class="uibutton confirm fb_submit" type="button" value="Post" title="vidpost">
+            </li>
+          </ol>
+          </p>
+         </form>
+        </div>
+        <!-- / Units -->
+      </div>
+<style>
+p.msg_wrap { word-wrap:break-word; }
+</style>
+ <?php
+include 'beePosts/includes/security.php';
+$result = mysqli_query($connection,"SELECT * FROM `posts` ORDER BY `post_id` DESC LIMIT $post_limit");
+?>
+    <?php  while($row = mysqli_fetch_array($result)) { $post_id = $row['post_id']; ?>
+    <div class="row" id="tupdate">
+    <div class="[ col-xs-12  ]" id="post-<?php echo $post_id; ?>"> <i class="pointer" id="pagination-<?php echo $post_id;?>"></i>
+      <div class="[ panel panel-default ] panel-google-plus">
+        <!-- Story -->
+        <div class="panel-google-plus-tags">
+                    <ul>
+                        <li>#Millennials</li>
+                        <li>#Generation</li>
+                    </ul>
+                </div>
+        
+          <div class="panel-heading">
+                    <img class="[ img-circle pull-left ]" src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg" alt="Mouse0270" />
+                    <h3>Robert McIntosh</h3>
+                    <h5><span>Shared publicly</span> - <span><?php echo timeAgo($row['post_date']);?> </span> </h5>
+           </div>
+        <div class="panel-body">
+          <p class="msg_wrap">
+              <?php echo parse_smileys(make_clickable(nl2br(stripslashes($row['post_desc']))), $smiley_folder); ?>
+          </p>
+          </div>
+          <?php if(!empty($row['vid_url'])) { ?>
+          <iframe width="400" height="300" src="http://www.youtube.com/embed/<?php echo get_youtubeid($row['vid_url']);?>" frameborder="0" allowfullscreen></iframe>
+          <?php } elseif(!empty($row['image_url'])) { ?>
+          <img class="panel-google-plus-image" src="<?php echo $base_url;?>image.php/<?php echo $row['image_url'];?>?width=585&nocache&quality=100&image=/<?php echo $base_folder;?>uploads/<?php echo $row['image_url'];?>">
+          <?php } ?>
+        
+ <div class="panel-footer">
+       <button type="button" class="[ btn btn-default ]">+1</button>
        
+       <button type="button" class="[ btn btn-default ]">
+           <span class="[ glyphicon glyphicon-share-alt ]"></span>
+       </button>
+              <div  ><a href="" class="acomment-reply" title="" id="acomment-comment-<?php echo $post_id; ?>">
+Write a comment..</a></div>
 
+ </div>
+        <div class="activity-comments">
+            
+            <ul id="CommentPosted<?php echo $post_id; ?>" >
+<?php 
+//fetch comments from comments table using post id
+$comments = mysqli_query($connection,"SELECT * FROM `comments` WHERE `post_id`=$post_id ORDER BY `comment_id` ASC ");
+$total_comments = mysqli_num_rows($comments);
+?>
+<li class="show-all" id="show-all-<?php echo $post_id; ?>" <?php if($total_comments == 0) { ?> style="display:none" <?php } ?>><a href="javascript:;"><span id="comment_count_<?php echo $post_id;?>"><?php echo $total_comments;?></span> comments</a></li>
 
+ <?php while($comt = mysqli_fetch_array($comments)) { $comment_id = $comt['comment_id']; ?>
+<li id="li-comment-<?php echo $comment_id; ?>" >
+<div class="acomment-avatar">
+<a href="http://www.facebook.com/itzurkarthi" rel="nofollow">
+    <img src="http://0.gravatar.com/avatar/222dad342987a085011139578299df12?s=30&r=G" class="img-circle" alt="Avatar Image" >
+</a>
+ <p style="float:right; text-align:right; font-size:10px;"><a href="javascript:;" rel="<?php echo $post_id; ?>" class="comment-delete" id="comment_delete_<?php echo $comment_id; ?>">X</a></p>
+</div>
+<div class="acomment-meta">
+<a href="http://www.facebook.com/itzurkarthi" target="_blank">Karthi</a>  <?php echo timeAgo($comt['commented_date']);?> 
+</div>
+<div class="acomment-content">
+    <p class="msg_wrap" style="padding-left:30px;"><?php echo parse_smileys(make_clickable(nl2br(stripslashes($comt['comment']))), $smiley_folder); ?></p>
+  <?php if(!empty($comt['picture'])) { ?>
+  <p class="msg_image"><img src="<?php echo $base_url;?>uploads/<?php echo $comt['picture'];?>"></p>
+  <?php } ?>
+</div></li>
+<?php } ?>
+</ul>
+
+        <form  method="post" id="fb-<?php echo $post_id; ?>" class="ac-form">
+        <div class="panel-google-plus-comment ac-reply-avatar">
+                    <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" />
+        </div>
+        <div class="ac-reply-content">
+        <div class="ac-textarea panel-google-plus-textarea">
+        <textarea id="ac-input-<?php echo $post_id; ?>" class="ac-input" name="comment" style="height:40px;"></textarea>
+        <input type="hidden" id="act-id-<?php echo $post_id; ?>" name="act_id" value="<?php echo $post_id; ?>" />
+        </div>
+        <input name="ac_form_submit" class=" confirm live_comment_submit btn btn-success" title="fb-<?php echo $post_id; ?>" id="comment_id_<?php echo $post_id; ?>" type="button" value="Submit"> &nbsp; or <a href="javascript:;" class="comment_cancel btn-danger btn" id="<?php echo $post_id; ?>">Cancel</a>			
+        </div>
+        </form>
+     
+</div>
+        <!-- / Units -->
+      </div>
+    </li>
+    <?php 
+		
+	} ?>
+  </div>
     <div class="row">
         <div class="[ col-xs-12  ]">
             <div class="[ panel panel-default ] panel-google-plus">
@@ -2163,5 +2584,134 @@ img {
             window.addEventListener("load", calculate_popups);
            
         </script>
+      
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+    var domain = "<?php echo $base_url;?>";
+      // Simple infinite Scrolling
+      
+      $(function(){
+        
+          var $timeline = $('#tupdate'),
+              $spinner = $('#Spinner').hide();
+        
+          function loadMore(){
+            
+            $(window).unbind('scroll.posts');
+            
+            $spinner.show();
+            
+            $.ajax({
+              url: "loadmore.php?lastPost="+ $(".pointer:last").attr('id'),
+              success: function(html){
+                  if(html){
+                      $timeline.append(html);
+                      $spinner.hide();
+                  }else{
+                      $spinner.html('<p>No more posts to show.</p>');
+                  }
+                  
+                  $(window).bind('scroll.posts',scrollEvent);
+              }
+            });
+          }
+        
+        
+          //lastAddedLiveFunc();
+          $(window).bind('scroll.posts',scrollEvent);
+          
+          function scrollEvent(){
+            var wintop = $(window).scrollTop(), docheight = $(document).height(), winheight = $(window).height();
+            var  scrolltrigger = 0.95;
+
+            if  ((wintop/(docheight-winheight)) > scrolltrigger)  loadMore();
+          }
+          
+      });
+	  
+ $(function(){
+	  $('#tabs div').hide();
+	  $('#tabs div:first').show();
+	  $('#tabs ul li:first').addClass('active');
+	  $('#tabs ul li a').click(function(){ 
+	  $('#tabs ul li').removeClass('active');
+	  $(this).parent().addClass('active'); 
+	  var currentTab = $(this).attr('href'); 
+	  $('#tabs div').hide();
+	  $(currentTab).show();
+	  return false;
+	  });
+	  
+	  
+	  jQuery('a.acomment-reply').live("click", function(e) {
+			var getpID =  jQuery(this).attr('id').replace('acomment-comment-','');
+			jQuery("#acomment-comment-"+getpID).hide();
+			jQuery("#fb-"+getpID).css('display','block');
+			jQuery("#ac-input-"+getpID).focus();
+						e.preventDefault();
+								});
+		
+	jQuery('a.comment_cancel').live("click", function(e) {
+			
+			var getpID =  jQuery(this).attr('id');	
+			
+			jQuery("#fb-"+getpID).css('display','');
+			jQuery("#acomment-comment-"+getpID).show();
+			jQuery("#ac-input-"+getpID).val('');
+		e.preventDefault();
+	});
+	  
+	  
+	  
+});
+    </script>
+<script src="<?php echo $base_url;?>assets/javascripts/all.js" type="text/javascript"></script>
+<script src="<?php echo $base_url;?>assets/javascripts/ajaxupload.3.5.js" type="text/javascript"></script>
+<script type="text/javascript" > 
+	jQuery(document).ready(function() {
+		var btnUpload=jQuery('#upload_pic');
+		var status=jQuery('#statuss');
+		new AjaxUpload(btnUpload, {
+			action: '<?php echo $base_url;?>upload-img.php',
+			name: 'uploadfile',
+			onSubmit: function(file, ext){
+				 if (! (ext && /^(jpg|jpeg|gif|png)$/.test(ext))){ 
+                    // extension is not allowed 
+					status.text('Only JPG or GIF files are allowed');
+					return false;
+				}
+				status.text('Uploading...');
+			},
+			onComplete: function(file, response){
+				//On completion clear the status
+				status.text('');
+	
+				//Add uploaded file to list
+				if(response==="success"){
+					jQuery('#pic_url').val(file);
+					//jQuery('#files').empty();
+					//jQuery('#files').text(file+' added').addClass('successe');
+					//var ts = Math.round((new Date()).getTime() / 1000);
+					jQuery('#files').html('<img src="<?php echo $base_url;?>uploads/'+file+'" height="100" width="100">');
+				} else{
+					//jQuery('#files').text(file+' upload failed').addClass('errore');
+				}
+			}
+		});
+		
+	});
+</script> 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=133252466777552";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=undefined"></script>
+<!-- AddThis Button END -->
+
+
 </body>
 </html>

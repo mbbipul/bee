@@ -5,8 +5,8 @@ if(isset($_SESSION['id']))
 }
 if(isset($_COOKIE['A']) && isset($_COOKIE['B']))
    {
-    include('php/db.php');
-    include('php/class.php');
+    include('assets/beeClasses/db.php');
+    include('assets/beeClasses/class.php');
     $q->cookie_login($_COOKIE['A'],$_COOKIE['B']);
    }
 

@@ -537,7 +537,7 @@ class FUNCTIONS {
                 {
                     //login true
                     session_start();
-                    $_SESSION['id'] = $database_result->userId;
+                    $_SESSION['userId'] = $database_result->userId;
 
                     ?>
 			<script>

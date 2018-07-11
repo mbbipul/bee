@@ -3,18 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/bee/assets/css/style.css</file>
-            <file>file:/C:/xampp/htdocs/bee/assets/css/mdb.min.css</file>
-            <file>file:/C:/xampp/htdocs/bee/test.html</file>
+            <file>file:/C:/xampp/htdocs/bee/assets/beeClasses/email_check.php</file>
+            <file>file:/C:/xampp/htdocs/bee/assets/beeClasses/signup.php</file>
+            <file>file:/C:/xampp/htdocs/bee/assets/beeClasses/login.php</file>
             <file>file:/C:/xampp/htdocs/bee/bee.php</file>
-            <file>file:/C:/xampp/htdocs/bee/assets/js/index.js</file>
-            <file>file:/C:/xampp/htdocs/bee/README.md</file>
+            <file>file:/C:/xampp/htdocs/bee/index.html</file>
+            <file>file:/C:/xampp/htdocs/bee/beePosts/index.php</file>
             <file>file:/C:/xampp/htdocs/bee/index.php</file>
+            <file>file:/C:/xampp/htdocs/bee/test.html</file>
+            <file>file:/C:/xampp/htdocs/bee/posttest.php</file>
+            <file>file:/C:/xampp/htdocs/bee/assets/beeClasses/db.php</file>
+            <file>file:/C:/xampp/htdocs/bee/beePosts/includes/config.php</file>
+            <file>file:/C:/xampp/htdocs/bee/assets/js/index.js</file>
             <file>file:/C:/xampp/htdocs/bee/assets/css/materialize.css</file>
-            <file>file:/C:/xampp/htdocs/bee/assets/css/bee.css</file>
-            <file>file:/C:/xampp/htdocs/bee/assets/css/w3.css</file>
+            <file>file:/C:/xampp/htdocs/bee/assets/beeClasses/class.php</file>
             <file>file:/C:/xampp/htdocs/bee/assets/css/beeCard.css</file>
             <file>file:/C:/xampp/htdocs/bee/chatbox.php</file>
+            <file>file:/C:/xampp/htdocs/bee/beePosts/loadmore.php</file>
         </group>
     </open-files>
 </project-private>
