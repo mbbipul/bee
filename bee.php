@@ -1824,7 +1824,7 @@ body {
             <textarea name="message" placeholder="What's on your mind?" id="message" cols="30" rows="3"></textarea>
           <ol class="controls clearfix">
             <li class="post">
-              <input class="uibutton confirm   btn waves-effect waves-light  cyan darken-4" type="button" title="npost" value="Post">
+              <input class="uibutton confirm   btn   cyan darken-4" type="button" title="npost" value="Post">
             </li>
           </ol>
           </p>
@@ -1835,10 +1835,10 @@ body {
           <p class="formUnit"> <i class="active_pic"></i>
             <textarea name="message" placeholder="What's on your mind?" id="pmessage" cols="30" rows="3"></textarea>
             <input type="hidden" name="pic_url" id="pic_url">
-            <button class="uibutton  btn waves-effect waves-light  cyan darken-4" type="button" id="upload_pic">Upload Picture</button><span id="statuss"></span>
+            <button class="uibutton  btn  cyan darken-4" type="button" id="upload_pic">Upload Picture</button><span id="statuss"></span>
           <ol class="controls clearfix">
             <li class="post">
-              <input class="uibutton confirm fb_submit  btn waves-effect waves-light  cyan darken-4"  type="button" value="Post" title="picpost">
+              <input class="uibutton confirm fb_submit  btn  cyan darken-4"  type="button" value="Post" title="picpost">
             </li>
           </ol>
           </p>
@@ -1852,7 +1852,7 @@ body {
             <input type="text" name="y_link" style="width:100%" id="y_link" placeholder="Enter Youtube Url - www.youtube.com/watch?v=rdmycu13Png">
           <ol class="controls clearfix">
             <li class="post">
-              <input class="uibutton confirm fb_submit" type="button" value="Post" title="vidpost">
+              <input class="uibutton btn cyan darken-4 confirm fb_submit" type="button" value="Post" title="vidpost">
             </li>
           </ol>
           </p>
@@ -1896,9 +1896,9 @@ $result = mysqli_query($connection,"SELECT * FROM `posts` ORDER BY `post_id` DES
           <?php } ?>
         
  <div class="panel-footer">
-       <button type="button" class="[ btn btn-default ]">+1</button>
+       <button type="button" class="[ btn white black-text ]">+1</button>
        
-       <button type="button" class="[ btn btn-default ]">
+       <button type="button" class="[ btn white black-text ]">
            <span class="[ glyphicon glyphicon-share-alt ]"></span>
        </button>
               <div  ><a href="" class="acomment-reply" title="" id="acomment-comment-<?php echo $post_id; ?>">
@@ -2102,9 +2102,9 @@ $total_comments = mysqli_num_rows($comments);
                 </div>
 
                 <div class="panel-footer" margin-top="50px">
-                    <button type="button" class="[ btn btn-default ]">+1</button>
+                    <button type="button" class="btn white black-text">+1</button>
                     
-                    <button type="button" class="[ btn btn-default ]">
+                    <button type="button" class="[ btn btn-default white black-text]">
                         <span class="[ glyphicon glyphicon-share-alt ]"></span>
                     </button>
                     <div class="input-placeholder">Add a comment...</div>
@@ -2124,9 +2124,11 @@ $total_comments = mysqli_num_rows($comments);
        
     </div>
     </div>
-  
+    
+    </div>
+    </div>
 </div>
-
+    
 <div class="right-content">
     <ul>
         <li>
