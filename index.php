@@ -1,7 +1,7 @@
 <?php
 if(isset($_SESSION['id']))
 {
-  header("Location: home.php");
+  header("Location: bee.php");
 }
 if(isset($_COOKIE['A']) && isset($_COOKIE['B']))
    {

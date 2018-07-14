@@ -21,7 +21,12 @@ include 'includes/smileys.php';
 </head>
 <body class="index">
 <div class="container">
-
+  <center>
+    <img src="<?php echo $base_url;?>assets/images/coverpage1.jpg">
+  </center>
+  <ol class="timeline clearfix">
+    <li class="spine"> <a href="#" title=""></a> </li><br>
+    <li class="left"> <i class="pointer"></i>
       <div class="unit" id="tabs">
         <ul class="actions">
           <li><a href="#tabs-1"><i class="icon icon-status"></i>Status</a></li>
@@ -73,11 +78,36 @@ include 'includes/smileys.php';
         </div>
         <!-- / Units -->
       </div>
-
+    </li>
+    <li class="right"> <i class="pointer"></i>
+      <div class="unit">
+        <!-- Story -->
+        <div class="storyUnit">
+          <div class="imageUnit"> <a href="#"><img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/371909_1319387360_251100084_q.jpg" width="32" height="32" alt=""></a>
+            <div class="imageUnit-content">
+              <h4><a href="http://www.facebook.com/itzurkarthi" target="_blank">Karthikeyan</a></h4>
+              <p>Follow me on Facebook</p>
+            </div>
+          </div>
+          <p> Features:</p><ul><li><span style="line-height: 15px;">Share Updates | Upload pictures | Share Youtube Videos | Post Hightlights</span></li>
+	<li>Support Smileys</li>
+    <li>FB like Commenting System</li>
+    <li>FB Style Upload Pictures in Comments</li>
+    </ul>
+        </div>
+        <!-- / Story -->
+        <!-- Units -->
+        <ol class="storyActions">
+        <div class="fb-like" data-href="https://www.facebook.com/w3lessons.info" data-send="false" data-width="410" data-show-faces="true"></div>
+        </ol>
+        <!-- / Units -->
+      </div>
+    </li>
+    </ol>
 <style>
 p.msg_wrap { word-wrap:break-word; }
 </style>
-    <ol  id="tupdate">
+    <ol class="timeline clearfix" id="tupdate">
  <?php
 include 'includes/security.php';
 $result = mysqli_query($connection,"SELECT * FROM `posts` ORDER BY `post_id` DESC LIMIT $post_limit");
@@ -89,9 +119,8 @@ $result = mysqli_query($connection,"SELECT * FROM `posts` ORDER BY `post_id` DES
       <div class="unit">
         <!-- Story -->
         <div class="storyUnit">
-          <div class="imageUnit"> <a href="#">
-                  <img src="uploads/icons-3.png" width="32" height="32" alt=""></a>
-           <p style="float:right; ext-align:right;"><a href="javascript:;" class="post-delete" id="post_delete_<?php echo $post_id; ?>">X</a></p>
+          <div class="imageUnit"> <a href="#"><img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/371909_1319387360_251100084_q.jpg" width="32" height="32" alt=""></a>
+           <p style="float:right; text-align:right;"><a href="javascript:;" class="post-delete" id="post_delete_<?php echo $post_id; ?>">X</a></p>
             <div class="imageUnit-content">
               <h4><a href="http://www.facebook.com/itzurkarthi" target="_blank">Karthikeyan</a></h4>
               <p><?php echo timeAgo($row['post_date']);?> via Web</p>
@@ -236,7 +265,7 @@ Write a comment..</a>
 	  
 });
     </script>
-<script src="<?php echo $base_url;?>assets/javascripts/all.js" type="text/javascript"></script>
+<script src="<?php echo $base_url;?>/assets/javascripts/all.js" type="text/javascript"></script>
 <script src="<?php echo $base_url;?>assets/javascripts/ajaxupload.3.5.js" type="text/javascript"></script>
 <script type="text/javascript" > 
 	jQuery(document).ready(function() {
@@ -280,10 +309,15 @@ Write a comment..</a>
   js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=133252466777552";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_floating_style addthis_counter_style" style="left:50px;top:50px;">
+<a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
+<a class="addthis_button_tweet" tw:count="vertical"></a>
+<a class="addthis_button_google_plusone" g:plusone:size="tall"></a>
+<a class="addthis_button_linkedin_counter" li:counter="top"></a>
+<a class="addthis_counter"></a>
+</div>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=undefined"></script>
 <!-- AddThis Button END -->
-
-
-
 </body>
 </html>
