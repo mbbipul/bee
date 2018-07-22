@@ -6689,7 +6689,8 @@ body.scrollable {
     .carousel-fade .carousel-item-left.active,
     .carousel-fade .carousel-item-prev.active {
       -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0); } }
+      transform: translate3d(0, 0, 0); } 
+  }
 
 .md-form {
   position: relative;

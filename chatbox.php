@@ -178,9 +178,6 @@ textarea,
   color: #000;
 }
 .left-content {
-  left: 10px;
-}
-.left-content {
   position: fixed;
   top: 42px;
   bottom: 0;

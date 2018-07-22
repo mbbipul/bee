@@ -1,11 +1,6 @@
 <?php
-    require 'assets/beeClasses/db.php';
-    require 'assets/beeClasses/class.php';
-    $userId = $_GET['userId'];
-    include 'beePosts/includes/security.php';
-    require 'beePosts/includes/config.php';
-    $result = mysqli_query($connection,"SELECT * FROM userdescription where userId = $userId");
-
+    require '../assets/beeClasses/db.php';
+    require '../assets/beeClasses/class.php';
 ?>
 
 <!DOCTYPE html><html lang='en' class=''>
@@ -16,11 +11,11 @@
 <!------ Include the above in your HEAD tag ---------->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="assets/css/materialize.css"  />
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"  />
         <!--import w3css -->
         <!--Import bootstrap-->
-        <link type="text/css" rel="stylesheet" href="assets/css/bee.css"  />
-        <link type="text/css" rel="stylesheet" href="assets/css/w3.css"  />
+        <link type="text/css" rel="stylesheet" href="../assets/css/bee.css"  />
+        <link type="text/css" rel="stylesheet" href="../assets/css/w3.css"  />
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
         <!-- Bootstrap core CSS -->
@@ -33,12 +28,12 @@
 
   <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
   <script src="http://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
-      <link rel="stylesheet" href="assets/css/beeCard.css">
-      <link rel="stylesheet" href="assets/css/beeUserProfile.css">
+  <link rel="stylesheet" href="../assets/css/beeCard.css">
+      <link rel="stylesheet" href="../assets/css/beeUserProfile.css">
 
         <!-- script styles -->
-        <link rel="stylesheet" href="assets/beeStories/zuck.css">
-        <link rel="stylesheet" href="assets/beeStories/skins/snapgram.css">
+        <link rel="stylesheet" href="../assets/beeStories/zuck.css">
+        <link rel="stylesheet" href="../assets/beeStories/skins/snapgram.css">
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel='stylesheet prefetch' href='//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
@@ -63,11 +58,33 @@
   </style>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="dist/cropper.css">
+  <style>
+    .label {
+      cursor: pointer;
+    }
+
+    .progress {
+      display: none;
+      margin-bottom: 1rem;
+    }
+
+    .alert {
+      display: none;
+    }
+
+    .img-container img {
+      max-width: 100%;
+    }
+  </style>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 </head>
 <body>
 <div class="topbar cyan darken-4 navbar-fixed">
     <a class="navbar-brand bee-margin-left-168 brand-logo bee-zero"  href="#">
-                        <img src="assets/beeImage/beeLogo1.png" width="70px" height="30px" alt="">
+                        <img src="../assets/beeImage/beeLogo1.png" width="70px" height="30px" alt="">
   </a>
   <div class="search-box">
     <div class="input-group ">
@@ -78,7 +95,7 @@
   <div class="right-group">
     <div class="link-group">
       <a href="javascript:void(0)">
-          <img class="img-circle bee-user-nav-pic" src="assets/img/IMG_20171205_122322.jpg">bee
+          <img class="img-circle bee-user-nav-pic" src="../assets/img/IMG_20171205_122322.jpg">bee
       </a>
     </div>
     <div class="link-group">
@@ -116,7 +133,7 @@
 <div class="left-content" >
   <div class="global-links">
       <a class="noUnderline" href="javascript:void(0)" >
-        <img class="img-circle" src="assets/img/IMG_20171205_122322.jpg"> bee bee
+        <img class="img-circle" src="../assets/img/IMG_20171205_122322.jpg"> bee bee
       
     </a>
       <a class="noUnderline" href="bee.php">
@@ -162,24 +179,13 @@
   </div>
 </div>
     <div class="feed-content bee-container" >
-          <div class="row bee_userprofile_image">
-                      <label class="label" data-toggle="tooltip" title="Change your avatar">
-<input type="file" class="sr-only" id="input" name="image" accept="image/*"><i class="far fa-edit"></i>
+        <div class="row">
+<label class="label" data-toggle="tooltip" title="Change your avatar">
+
+    <input type="file" class="sr-only" id="input" name="image" accept="image/*"><i class="far fa-edit"></i>
     </label>
-<?php
-    $userDes=mysqli_fetch_row($result);
-    $userProPicId = $userDes[1];
-    $proPic = mysqli_query($connection,"SELECT * FROM userprofilepic where userProfilePicId = $userProPicId");
-    $userProfilePic=mysqli_fetch_row($proPic);
-    $userProfilePicUrl = $userProfilePic[1];
-?>
-            <img id="avatar" class="img-circle bee-user-pic-position z-depth-5" 
-                 src="<?php echo $base_url;?>uploads/<?php echo $userProfilePicUrl;?>" alt="<?php echo $userProfilePicUrl;?>" />
-        </div> 
-        
 
-    
-
+      <img class="rounded" id="avatar" src="https://avatars0.githubusercontent.com/u/3456749?s=160" alt="avatar">
     <div class="progress">
       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
     </div>
@@ -207,7 +213,7 @@
     </div>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
-  <script src="http://localhost/bee/beeCropper/dist/cropper.js"></script>
+  <script src="dist/cropper.js"></script>
   <script>
     window.addEventListener('DOMContentLoaded', function () {
       var avatar = document.getElementById('avatar');
@@ -218,7 +224,6 @@
       var $alert = $('.alert');
       var $modal = $('#modal');
       var cropper;
-   
 
       $('[data-toggle="tooltip"]').tooltip();
 
@@ -278,8 +283,7 @@
             var formData = new FormData();
 
             formData.append('profilePic', blob);
-            formData.append('userId',<?php echo $userId;?>);
-            $.ajax('http://localhost/bee/beePosts/beeProfilePicUpload.php', {
+            $.ajax('http://localhost/bee/beePosts/upload-img.php', {
               method: 'POST',
               data: formData,
               processData: false,
@@ -326,10 +330,7 @@
         }
       });
     });
-  </script>
-  
-  
-     
+  </script>        </div> 
         <div class="collection bee-user-menu left">
             <style>
                 ::-webkit-scrollbar {
@@ -446,23 +447,7 @@
             </div>
         </div>
     </div>
-    <script>
-            function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            
-            reader.onload = function (e) {
-                $('#blah').attr('src', e.target.result);
-            }
-            
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    
-    $("#imgInp").change(function(){
-        readURL(this);
-    });
-    </script>
+ 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>

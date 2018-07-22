@@ -1,7 +1,16 @@
 
 <?php
     include 'beePosts/includes/config.php';
-    include 'beePosts/includes/smileys.php';   
+    include 'beePosts/includes/smileys.php'; 
+    session_start();
+
+if(!isset($_SESSION['userId']))
+{
+    header("Location: index.php");
+}
+else{
+    $userId = $_SESSION['userId'];
+}
 ?>
 <!DOCTYPE html><html lang='en' class=''>
 <head>
@@ -143,9 +152,7 @@ textarea,
 .topbar .search-box .input-group button:hover {
   color: #000;
 }
-.left-content {
-  left: 10px;
-}
+
 .left-content {
   position: fixed;
   top: 42px;
@@ -195,11 +202,11 @@ textarea,
   margin-right: 12px;
 }
 .feed-content {
-    width: 620px;
+    width: 630px;
   position: absolute;
   top: 42px;
   bottom: 0;
-  left: 300px;
+  left: 285px;
   right: 0;
   padding: 12px 7px;
   background: #e9ebee;
@@ -1321,7 +1328,7 @@ body {
   </div>
   <div class="right-group">
     <div class="link-group">
-      <a href="javascript:void(0)">
+      <a href="beeUserProfile.php?userId=<?php echo $userId?>">
           <img class="img-circle bee-user-nav-pic" src="assets/img/IMG_20171205_122322.jpg">bee
       </a>
     </div>
@@ -1359,7 +1366,7 @@ body {
 </div>
 <div class="left-content" >
   <div class="global-links">
-      <a class="noUnderline" href="javascript:void(0)" >
+      <a class="noUnderline" href="beeUserProfile.php?userId=<?php echo $userId?>" >
         <img class="img-circle" src="assets/img/IMG_20171205_122322.jpg"> bee bee
       
     </a>

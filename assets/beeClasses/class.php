@@ -820,9 +820,36 @@ class FUNCTIONS {
              }
              return $return_array;
         }
-    }    
-}
+    }  
+    
+    public function userProfilePicUpload() {
+            $uploaddir = $_SERVER['DOCUMENT_ROOT'].'/'.$base_folder.'uploads/'; 
+        $croppedImage = $_FILES['profilePic'];
+        $to_be_upload = $croppedImage['tmp_name'];
+        $new_file = 'beeUsern.png';
+        echo $new_file;
+        $ps = $uploaddir . $new_file;
+        move_uploaded_file($to_be_upload,$ps);
+              $table = 'userprofilepic';
+                $sqlQuery = "insert into $table (imageUrl,updateTime,userId ) values(?,?,?)";  
+                $time = date("y-d-m");
+        $query = $conn->prepare($sqlQuery);
+                $query->bindParam(1, $new_file);
+                $query->bindParam(2, $time);
+                 $query->bindParam(3, $userId);
+                 $query->execute();
+
+                
+                $sqlFindid = "select MAX(userProfilePicId) as userProfilePicId from $table ";
+                $sqlId = mysqli_query($connection, $sqlFindid);
+                 $obj = mysqli_fetch_assoc($sqlId);
+                $res = $obj['userProfilePicId'];
+
+    }
+
+    
+    
+        }
 
 $q = new FUNCTIONS;
-
 ?>

@@ -1,12 +1,3 @@
-<?php
-    require 'assets/beeClasses/db.php';
-    require 'assets/beeClasses/class.php';
-    $userId = $_GET['userId'];
-    include 'beePosts/includes/security.php';
-    require 'beePosts/includes/config.php';
-    $result = mysqli_query($connection,"SELECT * FROM userdescription where userId = $userId");
-
-?>
 
 <!DOCTYPE html><html lang='en' class=''>
 <head>
@@ -16,7 +7,7 @@
 <!------ Include the above in your HEAD tag ---------->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="assets/css/materialize.css"  />
+        <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  />
         <!--import w3css -->
         <!--Import bootstrap-->
         <link type="text/css" rel="stylesheet" href="assets/css/bee.css"  />
@@ -33,12 +24,12 @@
 
   <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
   <script src="http://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
-      <link rel="stylesheet" href="assets/css/beeCard.css">
-      <link rel="stylesheet" href="assets/css/beeUserProfile.css">
+      <link rel="stylesheet" href="http://localhost/bee/assets/css/beeCard.css">
+      <link rel="stylesheet" href="http://localhost/bee/assets/css/beeUserProfile.css">
 
         <!-- script styles -->
-        <link rel="stylesheet" href="assets/beeStories/zuck.css">
-        <link rel="stylesheet" href="assets/beeStories/skins/snapgram.css">
+        <link rel="stylesheet" href="http://localhost/bee//assets/beeStories/zuck.css">
+        <link rel="stylesheet" href="http://localhost/bee/assets/beeStories/skins/snapgram.css">
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel='stylesheet prefetch' href='//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
@@ -166,15 +157,7 @@
                       <label class="label" data-toggle="tooltip" title="Change your avatar">
 <input type="file" class="sr-only" id="input" name="image" accept="image/*"><i class="far fa-edit"></i>
     </label>
-<?php
-    $userDes=mysqli_fetch_row($result);
-    $userProPicId = $userDes[1];
-    $proPic = mysqli_query($connection,"SELECT * FROM userprofilepic where userProfilePicId = $userProPicId");
-    $userProfilePic=mysqli_fetch_row($proPic);
-    $userProfilePicUrl = $userProfilePic[1];
-?>
-            <img id="avatar" class="img-circle bee-user-pic-position z-depth-5" 
-                 src="<?php echo $base_url;?>uploads/<?php echo $userProfilePicUrl;?>" alt="<?php echo $userProfilePicUrl;?>" />
+            <img id="avatar" class="img-circle bee-user-pic-position z-depth-5"  src="assets/beeImage/received_559295534453679.jpeg" alt="Bipul Mandol" />
         </div> 
         
 
@@ -218,7 +201,6 @@
       var $alert = $('.alert');
       var $modal = $('#modal');
       var cropper;
-   
 
       $('[data-toggle="tooltip"]').tooltip();
 
@@ -252,8 +234,8 @@
       $modal.on('shown.bs.modal', function () {
         cropper = new Cropper(image, {
           aspectRatio: 1,
-          viewMode: 3,
         });
+          viewMode: 3,
       }).on('hidden.bs.modal', function () {
         cropper.destroy();
         cropper = null;
@@ -278,8 +260,7 @@
             var formData = new FormData();
 
             formData.append('profilePic', blob);
-            formData.append('userId',<?php echo $userId;?>);
-            $.ajax('http://localhost/bee/beePosts/beeProfilePicUpload.php', {
+            $.ajax('http://localhost/bee/beePosts/upload-img.php', {
               method: 'POST',
               data: formData,
               processData: false,
@@ -463,6 +444,7 @@
         readURL(this);
     });
     </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>

@@ -1,5 +1,5 @@
 <?php
-if(isset($_SESSION['id']))
+if(isset($_SESSION['Userid']))
 {
   header("Location: bee.php");
 }
