@@ -348,14 +348,14 @@ class FUNCTIONS {
 
     public function get_full_name($user_id){
         global $conn;
-        $table = "user";
-        $sql = "select first_name,middle_name,last_name from user where id = ?";
+        $table = "users";
+        $sql = "select userFirstName,userTitle from $table where userId = ?";
         $query = $conn->prepare($sql);
         $query->bindParam(1,$user_id);
         $query->execute();
         if($query->rowCount()>0){
         $result = $query->fetchObject();
-        $name = $result->first_name . ' '.$result->middle_name .' ' . $result->last_name;
+        $name = $result->userFirstName . ' '.$result->userTitle ;
         echo $name;
         }
         else{

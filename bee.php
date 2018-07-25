@@ -2,15 +2,27 @@
 <?php
     include 'beePosts/includes/config.php';
     include 'beePosts/includes/smileys.php'; 
+    include 'assets/beeClasses/class.php';
+    include 'assets/beeClasses/beeUserDetails.php';
     session_start();
+    if(!isset($_SESSION['userId']))
+    {
+        header("Location: index.php");
+    }
+    else{
+        $userId = $_SESSION['userId'];
+    }
+    if($userId){
+        $logUser = new beeUserDetails;
+        $loginUser = $logUser->getBeeUsers($userId);
+        //for login user profile details
+       
+        $loginUserDes = $logUser->getBeeUserDescription($userId);
+        $loginUserDesProfilePicId = $loginUserDes['userProfilePicId'];
+        //for login user profile pic
+        $loginUserProfilePicRes = $logUser->getBeeUserProfilePic($loginUserDesProfilePicId);
 
-if(!isset($_SESSION['userId']))
-{
-    header("Location: index.php");
-}
-else{
-    $userId = $_SESSION['userId'];
-}
+    }
 ?>
 <!DOCTYPE html><html lang='en' class=''>
 <head>
@@ -1328,8 +1340,8 @@ body {
   </div>
   <div class="right-group">
     <div class="link-group">
-      <a href="beeUserProfile.php?userId=<?php echo $userId?>">
-          <img class="img-circle bee-user-nav-pic" src="assets/img/IMG_20171205_122322.jpg">bee
+      <a href="beeUserProfile.php?userId=<?php echo $loginUser['userId']?>">
+          <img class="img-circle bee-user-nav-pic" src="<?php echo $base_url;?>uploads/<?php echo $loginUserProfilePicRes['imageUrl'];?>"><?php echo $loginUser['userFirstName']?>
       </a>
     </div>
     <div class="link-group">
@@ -1366,9 +1378,9 @@ body {
 </div>
 <div class="left-content" >
   <div class="global-links">
-      <a class="noUnderline" href="beeUserProfile.php?userId=<?php echo $userId?>" >
-        <img class="img-circle" src="assets/img/IMG_20171205_122322.jpg"> bee bee
-      
+    <a class="noUnderline" href="beeUserProfile.php?userId=<?php echo $loginUser['userId']?>" >
+        <img class="img-circle" src="<?php echo $base_url;?>uploads/<?php echo $loginUserProfilePicRes['imageUrl'];?>">
+        <?php echo $loginUser['userFirstName'].' '.$loginUser['userTitle']?>
     </a>
       <a class="noUnderline" href="bee.php">
       <img src="https://png.icons8.com/ios/2x/activity-feed-2.png" /> News Feed
@@ -1430,7 +1442,8 @@ body {
             <textarea name="message" placeholder="What's on your mind?" id="message" cols="30" rows="3"></textarea>
           <ol class="controls clearfix">
             <li class="post">
-              <input class="uibutton confirm   btn   cyan darken-4" type="button" title="npost" value="Post">
+               <input type="hidden" name="loginUserId" value="<?php echo $loginUser['userId']?>"/>
+              <input class="uibutton confirm fb_submit  btn   cyan darken-4" type="button" title="npost" value="Post">
             </li>
           </ol>
           </p>
@@ -1444,7 +1457,8 @@ body {
             <button class="uibutton  btn  cyan darken-4" type="button" id="upload_pic">Upload Picture</button><span id="statuss"></span>
           <ol class="controls clearfix">
             <li class="post">
-              <input class="uibutton confirm fb_submit  btn  cyan darken-4"  type="button" value="Post" title="picpost">
+                <input class="uibutton confirm fb_submit  btn  cyan darken-4"  type="button" value="Post" title="picpost">
+                <input type="hidden" name="loginUserId" value="<?php echo $loginUser['userId']?>"/>
             </li>
           </ol>
           </p>
@@ -1458,7 +1472,8 @@ body {
             <input type="text" name="y_link" style="width:100%" id="y_link" placeholder="Enter Youtube Url - www.youtube.com/watch?v=rdmycu13Png">
           <ol class="controls clearfix">
             <li class="post">
-              <input class="uibutton btn cyan darken-4 confirm fb_submit" type="button" value="Post" title="vidpost">
+                <input class="uibutton btn cyan darken-4 confirm fb_submit" type="button" value="Post" title="vidpost">
+                <input type="hidden" name="loginUserId" value="<?php echo $loginUser['userId']?>"/>
             </li>
           </ol>
           </p>
@@ -1471,9 +1486,16 @@ p.msg_wrap { word-wrap:break-word; }
 </style>
  <?php
 include 'beePosts/includes/security.php';
-$result = mysqli_query($connection,"SELECT * FROM `posts` ORDER BY `post_id` DESC LIMIT $post_limit");
+    $result = mysqli_query($connection,"SELECT * FROM posts ORDER BY postId DESC LIMIT $post_limit");
+    while($row = mysqli_fetch_array($result)) { 
+        $post_id = $row['postId']; 
+        $postUserId = $row['postUserId'];
+        $postUser = new beeUserDetails;
+        $postUserDes = $postUser->getBeeUserDescription($postUserId);
+        $postUserProPicId = $postUserDes[1];
+        $postUserProPicRes = $postUser->getBeeUserProfilePic($postUserProPicId);
+        $postUserProPicUrl = $postUserProPicRes[1];
 ?>
-    <?php  while($row = mysqli_fetch_array($result)) { $post_id = $row['post_id']; ?>
     <div class="row" id="tupdate">
     <div class="[ col-xs-12  ]" id="post-<?php echo $post_id; ?>"> <i class="pointer" id="pagination-<?php echo $post_id;?>"></i>
       <div class="[ panel panel-default ] panel-google-plus">
@@ -1486,19 +1508,19 @@ $result = mysqli_query($connection,"SELECT * FROM `posts` ORDER BY `post_id` DES
                 </div>
         
           <div class="panel-heading">
-                    <img class="[ img-circle pull-left ]" src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg" alt="Mouse0270" />
+              <img class="[ img-circle pull-left ]" src="<?php echo $base_url;?>uploads/<?php echo $postUserProPicUrl;?>" height="50px" width="50px" alt="Mouse0270" />
                     <h3>Robert McIntosh</h3>
-                    <h5><span>Shared publicly</span> - <span><?php echo timeAgo($row['post_date']);?> </span> </h5>
+                    <h5><span>Shared publicly</span> - <span><?php echo timeAgo($row['postDate']);?> </span> </h5>
            </div>
         <div class="panel-body">
           <p class="msg_wrap">
-              <?php echo parse_smileys(make_clickable(nl2br(stripslashes($row['post_desc']))), $smiley_folder); ?>
+              <?php echo parse_smileys(make_clickable(nl2br(stripslashes($row['postCap']))), $smiley_folder); ?>
           </p>
           </div>
-          <?php if(!empty($row['vid_url'])) { ?>
-          <iframe width="400" height="300" src="http://www.youtube.com/embed/<?php echo get_youtubeid($row['vid_url']);?>" frameborder="0" allowfullscreen></iframe>
-          <?php } elseif(!empty($row['image_url'])) { ?>
-          <img class="panel-google-plus-image" src="<?php echo $base_url;?>image.php/<?php echo $row['image_url'];?>?width=585&nocache&quality=100&image=/<?php echo $base_folder;?>uploads/<?php echo $row['image_url'];?>">
+          <?php if(!empty($row['videoUrl'])) { ?>
+          <iframe width="400" height="300" src="http://www.youtube.com/embed/<?php echo get_youtubeid($row['videoUrl']);?>" frameborder="0" allowfullscreen></iframe>
+          <?php } elseif(!empty($row['imageUrl'])) { ?>
+          <img class="panel-google-plus-image" src="<?php echo $base_url;?>image.php/<?php echo $row['imageUrl'];?>?width=585&nocache&quality=100&image=/<?php echo $base_folder;?>uploads/<?php echo $row['imageUrl'];?>">
           <?php } ?>
         
  <div class="panel-footer">

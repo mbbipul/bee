@@ -28,7 +28,7 @@
 
 
 // Checks in current directory of php file, with zip extension...
-    $new_file =  random_filename(50, $uploaddir, '.png');
+    $new_file =  random_filename(50, $uploaddir, 'png');
 
     
     

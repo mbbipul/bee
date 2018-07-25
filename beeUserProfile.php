@@ -12,6 +12,7 @@
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -163,8 +164,10 @@
 </div>
     <div class="feed-content bee-container" >
           <div class="row bee_userprofile_image">
-                      <label class="label" data-toggle="tooltip" title="Change your avatar">
-<input type="file" class="sr-only" id="input" name="image" accept="image/*"><i class="far fa-edit"></i>
+              <label style="margin-top:250px!important;margin-left: 240px!important;" class="label " data-toggle="tooltip" title="Change your avatar">
+                 <input type="file" class="sr-only" id="input" name="image" accept="image/*">
+                
+                 <i class="fa fa-edit "></i>
     </label>
 <?php
     $userDes=mysqli_fetch_row($result);
@@ -175,7 +178,7 @@
 ?>
             <img id="avatar" class="img-circle bee-user-pic-position z-depth-5" 
                  src="<?php echo $base_url;?>uploads/<?php echo $userProfilePicUrl;?>" alt="<?php echo $userProfilePicUrl;?>" />
-        </div> 
+          </div> 
         
 
     
@@ -328,8 +331,8 @@
     });
   </script>
   
-  
-     
+    
+        
         <div class="collection bee-user-menu left">
             <style>
                 ::-webkit-scrollbar {
@@ -354,22 +357,43 @@
     color: blue;
     
 }
+
             </style>
-            <div style="height:680px;" >
-                <a href="#!" class="collection-item bee-collection-item "><strong>About</strong></a>
-                <a href="#!" class="collection-item bee-collection-item"><strong>Timeline</strong></a>
-                <a href="#!" class="collection-item bee-collection-item"><strong>Friends</strong></a>
-                <a href="#!" class="collection-item bee-collection-item"><strong>Find Friend</strong></a>
-                <a href="#!" class="collection-item bee-collection-item"><strong>Take Part</strong></a>
-                <a href="#!" class="collection-item bee-collection-item"><strong>Selfie Event</strong></a>
-                <a href="#!" class="collection-item bee-collection-item"><strong>Photos</strong></a>
-                <a href="#!" class="collection-item bee-collection-item"><strong>Musics</strong></a>
-                <a href="#!" class="collection-item bee-collection-item "><strong>Videos</strong></a>
+          
+                </script>
+            <div style="height:680px;" class="">
+                <a href="#testing0" class="collection-item bee-collection-item ​tablinks actives" 
+                   onclick="openCity(event, 'testing0')">About
+                </a>
+                <a href="#test1" class="collection-item bee-collection-item ​tablinks" 
+                   onclick="openCity(event, 'test1')">Timeline
+                </a>
+                <a href="#test2" class="collection-item bee-collection-item ​tablinks"
+                   onclick="openCity(event, 'test2')">Friends
+                </a>
+                <a href="#test3" class="collection-item bee-collection-item ​tablinks"
+                   onclick="openCity(event, 'test3')">Find Friends</a>
+                <a href="#test4" class="collection-item bee-collection-item ​tablinks"
+                   onclick="openCity(event, 'test4')">Take Part
+                </a>
+                <a href="#testing0" class="collection-item bee-collection-item ​tablinks"
+                   onclick="openCity(event, 'testing0')">Selfie Event
+                </a>
+                <a href="#test5" class="collection-item bee-collection-item ​tablinks"
+                   onclick="openCity(event, 'test5')">Photos
+                </a>
+                <a href="#test6" class="collection-item bee-collection-item ​tablinks"
+                   onclick="openCity(event, 'test6')">Musics
+                </a>
+                <a href="#testing0" class="collection-item bee-collection-item ​tablinks"
+                   onclick="openCity(event, 'testing0')">Videos
+                </a>
             </div>
         </div>
-        
+
+  
         <div class="right-content">
-            <div class=" border-success mb-3 bee-user-feed" >
+            <div id="testing0" class="border-success mb-3 bee-user-feed tabcontent" style="">
                 <div class=" bg-transparent border-success">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -444,7 +468,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <div id="test1" class="col tabcontent" style="display:none;">Tab 1</div>
+            <div id="test3" class="col tabcontent" style="display:none;">Tab 3</div>
+            <div id="test4" class="col tabcontent" style="display:none;">Tab 4</div>
+            <div id="test5" class="col tabcontent" style="display:none;">Tab 5</div>
+            <div id="test6" class="col tabcontent" style="display:none;">Tab 6</div>
+            </div>
     </div>
     <script>
             function readURL(input) {
@@ -463,6 +492,26 @@
         readURL(this);
     });
     </script>
+    <script>
+        $(document).ready(function() {
+
+});
+    </script>
+    <script>
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }    
+    
+    document.getElementById(cityName).style.display = "block";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>

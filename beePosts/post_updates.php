@@ -2,8 +2,31 @@
 p.msg_wrap { word-wrap:break-word; }
 </style>
 <?php
+include('includes/SimpleImage.php');
+include('includes/config.php'); 
+$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/'.$base_folder.'uploads/'; 
+function random_filename($length, $directory = '', $extension = '')
+    {
+        // default to this files directory if empty...
+        $dir = !empty($directory) && is_dir($directory) ? $directory : dirname(__FILE__);
+
+        do {
+            $key = '';
+            $keys = array_merge(range(0, 9), range('a', 'z'));
+
+            for ($i = 0; $i < $length; $i++) {
+                $key .= $keys[array_rand($keys)];
+            }
+        } while (file_exists($dir . '/' . $key . (!empty($extension) ? '.' . $extension : '')));
+
+        return $key . (!empty($extension) ? '.' . $extension : '');
+    }
+
+
+// Checks in current directory of php file, with zip extension...
+    $rand_file_name =random_filename(50, $uploaddir, 'png');
+$new_file =  $uploaddir.$rand_file_name;
 if(!empty($_POST['message'])) {
-	include_once 'includes/config.php';
 	include_once 'includes/security.php';
 	include_once 'includes/smileys.php';
 	
@@ -12,7 +35,18 @@ if(!empty($_POST['message'])) {
 	$time = time();
 	//getting image link
 	if(!empty($_POST['pic_url'])) {
-		$image = strip_tags($_POST['pic_url']);
+		$imageOrginalUrl = strip_tags($_POST['pic_url']);
+                $file = $uploaddir.$imageOrginalUrl;
+                if (!copy($file, $new_file)) {
+                    echo "failed to copy";
+                    
+                }
+                else {
+                    $image = $rand_file_name;
+                    if (file_exists($file)) {
+                        unlink($file);
+                     }
+                }
 	} else {
 		$image = '';
 	}
@@ -25,7 +59,12 @@ if(!empty($_POST['message'])) {
 	}
 	
 	//insert into wall table
-	 $query = mysqli_query($connection,"INSERT INTO `posts` (`post_desc`, `image_url`, `vid_url`,`post_date`) VALUES ('$message', '$image', '$video','$time')") or die(mysql_error());
+        $loginUserId = $_POST['loginUserId'];
+	 $query = mysqli_query($connection,"INSERT INTO posts "
+                 . "(postId,imageUrl,videoUrl,postCap,postTagId,location,"
+                 . "postDate,postUserId) VALUES "
+                 . "('','$image', '$video','$message','','','$time','$loginUserId')") 
+                 or die(mysql_error());
 	 $ins_id = mysqli_insert_id($connection);
 	
 	
