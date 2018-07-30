@@ -13,14 +13,10 @@
         $userId = $_SESSION['userId'];
     }
     if($userId){
-        $logUser = new beeUserDetails;
+        $logUser = new beeUserDetails();
         $loginUser = $logUser->getBeeUsers($userId);
         //for login user profile details
-       
-        $loginUserDes = $logUser->getBeeUserDescription($userId);
-        $loginUserDesProfilePicId = $loginUserDes['userProfilePicId'];
-        //for login user profile pic
-        $loginUserProfilePicRes = $logUser->getBeeUserProfilePic($loginUserDesProfilePicId);
+    
 
     }
 ?>
@@ -38,6 +34,7 @@
         <link type="text/css" rel="stylesheet" href="assets/css/bee.css"  />
         <link rel="stylesheet" href="remote/maxcdn.bootstrapcdn.com_font-awesome_4.6.0_css_font-awesome.min.css">
         <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
   <!-- styles just for demo -->
 		<link rel="icon" href="ICON.png">
@@ -66,7 +63,98 @@
 <link rel='stylesheet prefetch' href='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
 
 <style>
+    .modals,
+.modal-box {
+  z-index: 900;
+}
 
+.modal-sandbox {
+  position: fixed;
+  width: 800px;
+  height: 100%;
+  top: 0;
+  left: -20px;
+  background: transparent;
+}
+
+.modals {
+  display: none; 
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgb(0,0,0);
+  background: rgba(0,0,0,.8);
+  overflow: auto;
+}
+
+.modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 600px;;
+  animation-name: modalbox;
+  animation-duration: .3s;
+  animation-timing-function: ease-out;
+}
+
+.modal-header {
+  padding: 20px 40px;
+  background: #546E7A;
+  color: #ffffff;
+}
+
+.modal-body {
+  background: #ECEFF1;
+  
+}
+
+/* Close Button */
+.close-modal {
+  cursor: pointer;
+}
+
+/* Animation */
+@-webkit-keyframes modalbox {
+  0% {
+    top: -250px; 
+    opacity: 0;
+  }
+  100% {
+    top: 0; 
+    opacity: 1;
+  }
+}
+
+@keyframes modalbox {
+  0% {
+    top: -250px; 
+    opacity: 0;
+  }
+  100% {
+    top: 0; 
+    opacity: 1;
+  }
+}
+
+
+
+.bee-share-post-text-area {
+    border: none!important;
+    outline: none!important;
+
+    -webkit-box-shadow: none!important;
+    -moz-box-shadow: none!important;
+    box-shadow: none!important;
+      resize: none!important;
+      position: absolute;
+      top: -0.5px;
+      left: -0.5px;
+      width: 477px!important;
+}
+.bee-share-post-text-area:hover{
+    z-index: 3;
+}
 textarea,
 .form-control {
   border: 0;
@@ -1341,7 +1429,7 @@ body {
   <div class="right-group">
     <div class="link-group">
       <a href="beeUserProfile.php?userId=<?php echo $loginUser['userId']?>">
-          <img class="img-circle bee-user-nav-pic" src="<?php echo $base_url;?>uploads/<?php echo $loginUserProfilePicRes['imageUrl'];?>"><?php echo $loginUser['userFirstName']?>
+          <img class="img-circle bee-user-nav-pic" src="<?php echo $base_url;?>uploads/<?php echo $logUser->getUserProfilePicUrl($userId);?>"><?php echo $loginUser['userFirstName']?>
       </a>
     </div>
     <div class="link-group">
@@ -1378,9 +1466,9 @@ body {
 </div>
 <div class="left-content" >
   <div class="global-links">
-    <a class="noUnderline" href="beeUserProfile.php?userId=<?php echo $loginUser['userId']?>" >
-        <img class="img-circle" src="<?php echo $base_url;?>uploads/<?php echo $loginUserProfilePicRes['imageUrl'];?>">
-        <?php echo $loginUser['userFirstName'].' '.$loginUser['userTitle']?>
+    <a class="noUnderline" href="beeUserProfile.php?userId=<?php echo $userId;?>" >
+        <img class="img-circle" src="<?php echo $base_url;?>uploads/<?php echo $logUser->getUserProfilePicUrl($userId);?>">
+        <?php echo $logUser->getBeeUserFullName($userId);?>
     </a>
       <a class="noUnderline" href="bee.php">
       <img src="https://png.icons8.com/ios/2x/activity-feed-2.png" /> News Feed
@@ -1458,7 +1546,7 @@ body {
           <ol class="controls clearfix">
             <li class="post">
                 <input class="uibutton confirm fb_submit  btn  cyan darken-4"  type="button" value="Post" title="picpost">
-                <input type="hidden" name="loginUserId" value="<?php echo $loginUser['userId']?>"/>
+                <input type="hidden" name="loginUserId" value="<?php echo $userId;?>"/>
             </li>
           </ol>
           </p>
@@ -1473,7 +1561,7 @@ body {
           <ol class="controls clearfix">
             <li class="post">
                 <input class="uibutton btn cyan darken-4 confirm fb_submit" type="button" value="Post" title="vidpost">
-                <input type="hidden" name="loginUserId" value="<?php echo $loginUser['userId']?>"/>
+                <input type="hidden" name="loginUserId" value="<?php echo $userId;?>"/>
             </li>
           </ol>
           </p>
@@ -1491,10 +1579,7 @@ include 'beePosts/includes/security.php';
         $post_id = $row['postId']; 
         $postUserId = $row['postUserId'];
         $postUser = new beeUserDetails;
-        $postUserDes = $postUser->getBeeUserDescription($postUserId);
-        $postUserProPicId = $postUserDes[1];
-        $postUserProPicRes = $postUser->getBeeUserProfilePic($postUserProPicId);
-        $postUserProPicUrl = $postUserProPicRes[1];
+       
 ?>
     <div class="row" id="tupdate">
     <div class="[ col-xs-12  ]" id="post-<?php echo $post_id; ?>"> <i class="pointer" id="pagination-<?php echo $post_id;?>"></i>
@@ -1505,12 +1590,12 @@ include 'beePosts/includes/security.php';
                         <li>#Millennials</li>
                         <li>#Generation</li>
                     </ul>
-                </div>
+        </div>
         
           <div class="panel-heading">
-              <img class="[ img-circle pull-left ]" src="<?php echo $base_url;?>uploads/<?php echo $postUserProPicUrl;?>" height="50px" width="50px" alt="Mouse0270" />
-                    <h3>Robert McIntosh</h3>
-                    <h5><span>Shared publicly</span> - <span><?php echo timeAgo($row['postDate']);?> </span> </h5>
+             <img class="[ img-circle pull-left ]" src="<?php echo $base_url;?>uploads/<?php echo $postUser->getUserProfilePicUrl($postUserId);?>" height="50px" width="50px" alt="<?php echo $postUser->getBeeUserFullName($postUserId);?>" />
+              <h3><a href="<?php echo $postUser->getUserUrl($postUserId);?>"><?php echo $postUser->getBeeUserFullName($postUserId);?></a></h3>
+              <h5 style="padding-top:10px;"><span>Shared publicly</span> - <span><?php echo timeAgo($row['postDate']);?> </span> </h5>
            </div>
         <div class="panel-body">
           <p class="msg_wrap">
@@ -1520,19 +1605,123 @@ include 'beePosts/includes/security.php';
           <?php if(!empty($row['videoUrl'])) { ?>
           <iframe width="400" height="300" src="http://www.youtube.com/embed/<?php echo get_youtubeid($row['videoUrl']);?>" frameborder="0" allowfullscreen></iframe>
           <?php } elseif(!empty($row['imageUrl'])) { ?>
-          <img class="panel-google-plus-image" src="<?php echo $base_url;?>image.php/<?php echo $row['imageUrl'];?>?width=585&nocache&quality=100&image=/<?php echo $base_folder;?>uploads/<?php echo $row['imageUrl'];?>">
-          <?php } ?>
-        
- <div class="panel-footer">
-       <button type="button" class="[ btn white black-text ]">+1</button>
-       
-       <button type="button" class="[ btn white black-text ]">
-           <span class="[ glyphicon glyphicon-share-alt ]"></span>
-       </button>
-              <div  ><a href="" class="acomment-reply" title="" id="acomment-comment-<?php echo $post_id; ?>">
-Write a comment..</a></div>
+          <img class="panel-google-plus-image" src="<?php echo $base_url;?>image.php/<?php echo $row['imageUrl'];?>?width=595&nocache&quality=100&image=/<?php echo $base_folder;?>uploads/<?php echo $row['imageUrl'];?>">
+          <?php } 
+          $love = $postUser->checkBeeUserLove($post_id, $userId);
+          ?>
+            
+          <i class="fa  <?php if($love===1){echo 'fa-heart bee-red-love';}elseif ($love===0) {echo 'fa-heart-o';}?> bee-box" id="beelove<?php echo $post_id?>" style="font-size:30px;display: inline-block;width:200px;padding: 10px 20px 10px 80px;cursor: pointer"><span class="changeNumber" style="font-size:20px;padding-left: 10px;"><?php echo $postUser->countBeePostLove($post_id)?></span></i>      
+          <i class="fa fa-share bee-box bee-modal" data-modal="modal-name<?php echo $post_id;?>" style="font-size:30px;display: inline-block;width:200px;padding: 10px 20px 10px 80px"></i>
+           <a href="" class="acomment-reply w3-hover-opacity  beesss " style="display: inline;width:200px;padding: 10px 20px 10px 80px" title="" id="acomment-comment-<?php echo $post_id; ?>">
+                      <i class="fa fa-comment-o " style="font-size:30px;"></i>
+</a>
+           
+               
 
- </div>
+   <!-- Trigger Modal. -->
+
+<!-- Modal -->
+<div class="modals" id="modal-name<?php echo $post_id;?>">
+  <div class="modal-sandbox"></div>
+  <div class="modal-box">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="media">
+                            <div class="media-left">
+                                <img class="media-object img-circle" src="http://localhost/bee/beePosts/uploads/yf5m60lmz6bh0qg6udpoy2a1nsog3fkcaz1ff2w4270dq5ghe8.png" height="40px" width="40px" alt="Food Portfolio" />              </a>
+                            </div>
+                            <div class="media-right" style="padding-left:10px;">Bipul Mandol
+                                <br> <span>Publically</span>
+                            </div>
+                            
+                        </div>
+      </div>
+      <div class="modal-body" style="padding:0px!important;">
+          <form>
+      <div class="form-group" style="border: none!important">
+      <label for="comment"></label>
+      <textarea class="form-control bee-share-post-text-area" rows="5" id="comment" placeholder="say something"></textarea>
+    </div>
+  </form>
+                        
+                        
+          <div class="media" >
+                <div class="media-left">
+                      <?php if(!empty($row['videoUrl'])) { ?>
+          <iframe width="400" height="300" src="http://www.youtube.com/embed/<?php echo get_youtubeid($row['videoUrl']);?>" frameborder="0" allowfullscreen></iframe>
+          <?php } elseif(!empty($row['imageUrl'])) { ?>
+          <img class="media-object" style="width:600px;margin-top: 110px;" src="<?php echo $base_url;?>image.php/<?php echo $row['imageUrl'];?>?width=595&nocache&quality=100&image=/<?php echo $base_folder;?>uploads/<?php echo $row['imageUrl'];?>">
+          <?php }?>
+                </div>
+                           
+                            
+           </div>
+          <div style="padding-left: 10px;border-left: 10px solid #a6adff;z-index: -9;">
+          <div class="panel-heading">
+             <img class="[ img-circle pull-left ]" src="<?php echo $base_url;?>uploads/<?php echo $postUser->getUserProfilePicUrl($postUserId);?>" height="50px" width="50px" alt="<?php echo $postUser->getBeeUserFullName($postUserId);?>" />
+             <div style="margin-left:35px!important;">
+             <h6><a href="<?php echo $postUser->getUserUrl($postUserId);?>"><?php echo $postUser->getBeeUserFullName($postUserId);?></a></h6>
+              <h6 style="padding-left: 5px;"><span>Shared publicly</span> - <span><?php echo timeAgo($row['postDate']);?> </span> </h6>
+             </div>
+             </div>
+          <div class="panel-body" style="padding:5px!important;">
+              <p >
+              <?php echo parse_smileys(make_clickable(nl2br(stripslashes($row['postCap']))), $smiley_folder); ?>
+          </p>
+          </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default close-modal" >Cancel</button>
+        <button type="button" class="btn btn-primary">Share Post</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- Aditional Styles -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+
+           <script>
+               document.querySelector('#beelove<?php echo $post_id?>').addEventListener('click', function() {
+    var likeUserId = "<?php echo $userId;?>";
+    var postId = "<?php echo $post_id?>";
+        var dataString = 'postId=' + postId + '&likeUserId=' + likeUserId ;
+         if(!$(this).hasClass('bee-red-love')){
+             $('.changeNumber').html(parseInt($('.changeNumber').html(), 10)+1);
+             $.ajax({
+                type: "POST",
+                url: "<?php echo $base_url;?>beeLove.php",
+                data: dataString,
+                cache: false,
+                success: function() {
+
+                }
+                });
+          }
+          if($(this).hasClass('bee-red-love')){
+             $('.changeNumber').html(parseInt($('.changeNumber').html(), 10)-1);
+             $.ajax({
+                type: "POST",
+                url: "<?php echo $base_url;?>beeNoLove.php",
+                data: dataString,
+                cache: false,
+                success: function() {
+
+                }
+                });
+          }
+});
+
+               
+               document.querySelector('#beelove<?php echo $post_id?>').addEventListener('click', function() { 
+            $(this).toggleClass('fa-heart');
+            $(this).toggleClass('fa-heart-o');
+            $(this).toggleClass('bee-red-love');
+});
+   </script>
         <div class="activity-comments">
             
             <ul id="CommentPosted<?php echo $post_id; ?>" >
@@ -1543,19 +1732,19 @@ $total_comments = mysqli_num_rows($comments);
 ?>
 <li class="show-all" id="show-all-<?php echo $post_id; ?>" <?php if($total_comments == 0) { ?> style="display:none" <?php } ?>><a href="javascript:;"><span id="comment_count_<?php echo $post_id;?>"><?php echo $total_comments;?></span> comments</a></li>
 
- <?php while($comt = mysqli_fetch_array($comments)) { $comment_id = $comt['comment_id']; ?>
+ <?php while($comt = mysqli_fetch_array($comments)) { $comment_id = $comt['comment_id']; $commentUserId= $comt['userId'];?>
 <li id="li-comment-<?php echo $comment_id; ?>" >
-<div class="acomment-avatar">
-<a href="http://www.facebook.com/itzurkarthi" rel="nofollow">
-    <img src="http://0.gravatar.com/avatar/222dad342987a085011139578299df12?s=30&r=G" class="img-circle" alt="Avatar Image" >
-</a>
- <p style="float:right; text-align:right; font-size:10px;"><a href="javascript:;" rel="<?php echo $post_id; ?>" class="comment-delete" id="comment_delete_<?php echo $comment_id; ?>">X</a></p>
+<div class="acomment-avatar ">
+    <a href="<?php echo $postUser->getUserUrl($commentUserId);?>" rel="nofollow" >
+        <img src="<?php echo $base_url;?>uploads/<?php echo $postUser->getUserProfilePicUrl($commentUserId);?>" class="img-circle " alt="Avatar Image" >
+    </a>
+    <p style="float:right; text-align:right; font-size:10px;"><a href="javascript:;" rel="<?php echo $post_id; ?>" class="comment-delete" id="comment_delete_<?php echo $comment_id; ?>">X</a></p>
 </div>
 <div class="acomment-meta">
-<a href="http://www.facebook.com/itzurkarthi" target="_blank">Karthi</a>  <?php echo timeAgo($comt['commented_date']);?> 
+    <a href="<?php echo $postUser->getUserUrl($commentUserId);?>"><?php echo $postUser->getBeeUserFullName($commentUserId);?></a> <br> <?php echo timeAgo($comt['commented_date']);?> 
 </div>
 <div class="acomment-content">
-    <p class="msg_wrap" style="padding-left:30px;"><?php echo parse_smileys(make_clickable(nl2br(stripslashes($comt['comment']))), $smiley_folder); ?></p>
+    <p class="msg_wrap" style="padding-left:30px;margin-bottom: 10px!important"><?php echo parse_smileys(make_clickable(nl2br(stripslashes($comt['comment']))), $smiley_folder); ?></p>
   <?php if(!empty($comt['picture'])) { ?>
   <p class="msg_image"><img src="<?php echo $base_url;?>uploads/<?php echo $comt['picture'];?>"></p>
   <?php } ?>
@@ -1565,13 +1754,14 @@ $total_comments = mysqli_num_rows($comments);
 
         <form  method="post" id="fb-<?php echo $post_id; ?>" class="ac-form">
         <div class="panel-google-plus-comment ac-reply-avatar">
-                    <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" />
+            <img class="img-circle" src="<?php echo $base_url;?>uploads/<?php echo $postUser->getUserProfilePicUrl($postUserId);?>" alt="User Image" />
         </div>
         <div class="ac-reply-content">
         <div class="ac-textarea panel-google-plus-textarea">
         <textarea id="ac-input-<?php echo $post_id; ?>" class="ac-input" name="comment" style="height:40px;"></textarea>
         <input type="hidden" id="act-id-<?php echo $post_id; ?>" name="act_id" value="<?php echo $post_id; ?>" />
         </div>
+            <input type="hidden" name="logUserId" value="<?php echo $userId;?>">
         <input name="ac_form_submit" class=" confirm live_comment_submit btn btn-success" title="fb-<?php echo $post_id; ?>" id="comment_id_<?php echo $post_id; ?>" type="button" value="Submit"> &nbsp; or <a href="javascript:;" class="comment_cancel btn-danger btn" id="<?php echo $post_id; ?>">Cancel</a>			
         </div>
         </form>
@@ -1890,7 +2080,19 @@ $total_comments = mysqli_num_rows($comments);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="assets/beeStories/zuck.js"></script>
-         <script>
+<script>
+    $(".bee-modal").click(function(e){
+  e.preventDefault();
+  dataModal = $(this).attr("data-modal");
+  $("#" + dataModal).css({"display":"block"});
+});
+
+$(".close-modal, .modal-sandbox").click(function(){
+  $(".modals").css({"display":"none"});
+});
+</script>
+         
+<script>
             function buildItem(id, type, length, src, preview, link, linkText, seen, time){
                 return {
                             "id": id,

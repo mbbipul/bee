@@ -1,7 +1,83 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+
+        <link rel="stylesheet" href="bootstrap.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>   
+    
+    <style>
+.bee-share-post-text-area {
+    border: none!important;
+    outline: none!important;
+
+    -webkit-box-shadow: none!important;
+    -moz-box-shadow: none!important;
+    box-shadow: none!important;
+      resize: none!important;
+      position: absolute;
+      top: -0.5px;
+      left: -0.5px;
+}
+                        </style>
+    </head>
     <body>
-         <script src="newjavascript.js"></script>
-   
+        <i  data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </i>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialogs" role="document">
+                <div class="modal-contents">
+                    <div class="modal-headers">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="media">
+                            <div class="media-left">
+                                <img class="media-object img-circle" src="http://lorempixel.com/350/350/food/2" height="40px" width="40px" alt="Food Portfolio" />              </a>
+                            </div>
+                            <div class="media-right" style="padding: 0px!important;">Bipul Mandol
+                                <br> <span>Publically</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="modal-bodys">
+                        
+  <form>
+      <div class="form-group" style="border: none!important">
+      <label for="comment"></label>
+      <textarea class="form-control bee-share-post-text-area" rows="5" id="comment" placeholder="say something"></textarea>
+    </div>
+  </form>
+                        
+                        
+                        <div class="media">
+                            <div class="media-left">
+                                <img class="media-object" src="http://localhost/bee/beePosts/image.php/5qx03l1p5ijv9m84rgni5iajjdb20c7qn4dhi0hv2zoyclycog.png?width=595&nocache&quality=100&image=/bee/beePosts/uploads/5qx03l1p5ijv9m84rgni5iajjdb20c7qn4dhi0hv2zoyclycog.png" alt="Food Portfolio" />      
+                            </div>
+                           
+                            
+                        </div>
+                        Modals are built with HTML, CSS, and JavaScript. They’re positioned over everything else in the document and remove scroll from the <body> so that modal content scrolls instead.
+                            Clicking on the modal “backdrop” will automatically close the modal.
+                            Bootstrap only supports one modal window at a time. Nested modals aren’t supported as we believe them to be poor user experiences.
+                            Modals use position: fixed, which can sometimes be a bit particular about its rendering. Whenever possible, place your modal HTML in a top-level position to avoid potential interference from other elements. You’ll likely run into issues when nesting a .modal within another fixed element.
+                            Once again, due to position: fixed, there are some caveats with using modals on mobile devices. See our browser support docs for details.
+                            Due to how HTML5 defines its semantics, the autofocus HTML attribute has no effect in Bootstrap modals. To achieve the same effect, use some custom JavaScript:
+                            Before getting started with Bootstrap’s modal component, be sure to read the following as our menu options have recently changed.
+
+                    </div>
+                    <div class="modal-footers">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary">Share Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
     </body>
 </html>

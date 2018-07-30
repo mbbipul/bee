@@ -3,51 +3,58 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/xampp/htdocs/bee/beePosts/includes/SimpleImage.php</file>
+            <file>file:/C:/xampp/htdocs/bee/beeCropper/rollup.config.js</file>
+            <file>file:/C:/xampp/htdocs/bee/bee.php</file>
+            <file>file:/C:/xampp/htdocs/bee/beeCropper/newhtml.html</file>
+            <file>file:/C:/xampp/htdocs/bee/beePosts/assets/javascripts/ajaxupload.3.5.js</file>
+            <file>file:/C:/xampp/htdocs/bee/LikeReaction/index.php</file>
+            <file>file:/C:/xampp/htdocs/bee/beeCropper/beeUserProfile.php</file>
+            <file>file:/C:/xampp/htdocs/bee/beePosts/image.php</file>
+            <file>file:/C:/xampp/htdocs/bee/beePosts/assets/stylesheets/all.css</file>
+            <file>file:/C:/xampp/htdocs/bee/LikeReaction/ajaxReaction.php</file>
+            <file>file:/C:/xampp/htdocs/bee/beeCropper/dist/cropper.js</file>
+            <file>file:/C:/xampp/htdocs/bee/assets/beeClasses/signup.php</file>
+            <file>file:/C:/xampp/htdocs/bee/LikeReaction/config.php</file>
+            <file>file:/C:/xampp/htdocs/bee/README.md</file>
+            <file>file:/C:/xampp/htdocs/bee/beeUserProfile.php</file>
+            <file>file:/C:/xampp/htdocs/bee/beePosts/beeProfilePicUpload.php</file>
+            <file>file:/C:/xampp/htdocs/bee/beePosts/assets/stylesheets/fb-icons.png</file>
+            <file>file:/C:/xampp/htdocs/bee/beePosts/comment_delete.php</file>
+            <file>file:/C:/xampp/htdocs/bee/assets/css/materialize.min.css</file>
+            <file>file:/C:/xampp/htdocs/bee/chatbox.php</file>
             <file>file:/C:/xampp/htdocs/bee/beePosts/assets/stylesheets/fb-buttons.css</file>
             <file>file:/C:/xampp/htdocs/bee/beePosts/assets/javascripts/all.js</file>
             <file>file:/C:/xampp/htdocs/bee/beePosts/assets/stylesheets/timeline.css</file>
-            <file>file:/C:/xampp/htdocs/bee/beePosts/includes/SimpleImage.php</file>
+            <file>file:/C:/xampp/htdocs/bee/assets/css/beeUserHome.css</file>
             <file>file:/C:/xampp/htdocs/bee/assets/beeClasses/beeShowUserProfile.php</file>
             <file>file:/C:/xampp/htdocs/bee/index.html</file>
-            <file>file:/C:/xampp/htdocs/bee/bee.php</file>
             <file>file:/C:/xampp/htdocs/bee/beePosts/upload-img.php</file>
             <file>file:/C:/xampp/htdocs/bee/assets/css/beeUserProfile.css</file>
-            <file>file:/C:/xampp/htdocs/bee/beeCropper/newhtml.html</file>
             <file>file:/C:/xampp/htdocs/bee/index.php</file>
             <file>file:/C:/xampp/htdocs/bee/beePosts/assets/stylesheets/normalize.css</file>
             <file>file:/C:/xampp/htdocs/bee/beePosts/test.php</file>
             <file>file:/C:/xampp/htdocs/bee/beeCropper/newEmptyPHP.php</file>
             <file>file:/C:/xampp/htdocs/bee/posttest.php</file>
-            <file>file:/C:/xampp/htdocs/bee/beePosts/assets/javascripts/ajaxupload.3.5.js</file>
+            <file>file:/C:/xampp/htdocs/bee/LikeReaction/feed.php</file>
             <file>file:/C:/xampp/htdocs/bee/beePosts/includes/config.php</file>
-            <file>file:/C:/xampp/htdocs/bee/beePosts/newEmptyPHP.php</file>
-            <file>file:/C:/xampp/htdocs/bee/beeCropper/beeUserProfile.php</file>
-            <file>file:/C:/xampp/htdocs/bee/beePosts/image.php</file>
             <file>file:/C:/xampp/htdocs/bee/assets/css/materialize.css</file>
-            <file>file:/C:/xampp/htdocs/bee/beePosts/assets/stylesheets/all.css</file>
-            <file>file:/C:/xampp/htdocs/bee/assets/js/jquery.idTabs.min.js</file>
             <file>file:/C:/xampp/htdocs/bee/beePosts/includes/security.php</file>
             <file>file:/C:/xampp/htdocs/bee/beePosts/post_delete.php</file>
-            <file>file:/C:/xampp/htdocs/bee/newjavascript.js</file>
             <file>file:/C:/xampp/htdocs/bee/assets/beeClasses/email_check.php</file>
-            <file>file:/C:/xampp/htdocs/bee/beePosts/assets/stylesheets/comments.css</file>
             <file>file:/C:/xampp/htdocs/bee/beePosts/includes/smileys.php</file>
             <file>file:/C:/xampp/htdocs/bee/beePosts/post_updates.php</file>
-            <file>file:/C:/xampp/htdocs/bee/assets/beeClasses/signup.php</file>
+            <file>file:/C:/xampp/htdocs/bee/beePosts/assets/stylesheets/comments.css</file>
             <file>file:/C:/xampp/htdocs/bee/assets/beeClasses/login.php</file>
-            <file>file:/C:/xampp/htdocs/bee/beeUserProfile.php</file>
-            <file>file:/C:/xampp/htdocs/bee/beePosts/beeProfilePicUpload.php</file>
-            <file>file:/C:/xampp/htdocs/bee/beePosts/comment_delete.php</file>
             <file>file:/C:/xampp/htdocs/bee/test.html</file>
             <file>file:/C:/xampp/htdocs/bee/assets/beeClasses/db.php</file>
             <file>file:/C:/xampp/htdocs/bee/test2.php</file>
             <file>file:/C:/xampp/htdocs/bee/assets/js/index.js</file>
+            <file>file:/C:/xampp/htdocs/bee/assets/beeClasses/beeUserDetails.php</file>
             <file>file:/C:/xampp/htdocs/bee/assets/css/mdb.css</file>
-            <file>file:/C:/xampp/htdocs/bee/assets/css/materialize.min.css</file>
             <file>file:/C:/xampp/htdocs/bee/assets/css/beeCard.css</file>
-            <file>file:/C:/xampp/htdocs/bee/chatbox.php</file>
-            <file>file:/C:/xampp/htdocs/bee/beePosts/comment_update.php</file>
             <file>file:/C:/xampp/htdocs/bee/assets/beeClasses/class.php</file>
+            <file>file:/C:/xampp/htdocs/bee/beePosts/comment_update.php</file>
             <file>file:/C:/xampp/htdocs/bee/beePosts/loadmore.php</file>
             <file>file:/C:/xampp/htdocs/bee/beeCropper/upload-cropped-image-to-server.html</file>
         </group>

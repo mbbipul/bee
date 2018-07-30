@@ -56,11 +56,34 @@ class FUNCTIONS {
                 $query->bindParam(5, $sex);
                 $query->bindParam(6, $dob);
 
-                if($query->execute())
-                    {       $user_id_may_be=$conn->lastInsertId();
-                            echo '<p class="text-primary">Hello '.$fname.' You have been successfully signed up. Please Log In now.</p>'.' <button onclick="login();" class="btn btn-primary">Click here to login.</button>';
-                            //$path = "../uploads/$user_id_may_be";
-                          //  mkdir($path);
+                if ($query->execute()) {
+                            $user_id_may_be = $conn->prepare("select * from users where loginUserEmail= :email");
+                            $user_id_may_be->execute(['email' => $email]);                            
+                            $user_id_get = $user_id_may_be->fetch();
+                            $user_id = $user_id_get[0];
+                            $initUserProPic = "insert into userprofilepic(imageUrl,updateTime,userId) values(?,?,?)";
+                            $initUserProPicQuery = $conn->prepare($initUserProPic);
+                            $defaultUserProPic = "beeDefaultUserProfilePicture2018Version1beeDefaultUserProfilePicture2018Version1beeDefaultUserProfilePicture2018Version1.png";
+                            $beUserTime = date('Y-m-d H:i:s');
+                            $initUserProPicQuery->bindParam(1,$defaultUserProPic);
+                            $initUserProPicQuery->bindParam(2,$beUserTime);
+                            $initUserProPicQuery->bindParam(3,$user_id);
+                            if ($initUserProPicQuery->execute()){
+                                $userproPicId=$conn->prepare("select MAX(userProfilePicId) as userProfilePicId from userprofilepic where userId= :user_id");
+                                $userproPicId ->execute(['user_id' => $user_id]);
+                                $res = $userproPicId->fetch();
+                                $userProfilePicId = $res[0];
+                                $initializeUserProfile = "insert into userdescription(userProfilePicId,userJoinDate,userId) values(?,?,?)";
+                                $initializeUserProfileQuery = $conn->prepare($initializeUserProfile);
+                                $initializeUserProfileQuery->bindParam(1,$userProfilePicId);
+                                $initializeUserProfileQuery->bindParam(2,$beUserTime);
+                                $initializeUserProfileQuery->bindParam(3,$user_id);
+                                if ($initializeUserProfileQuery->execute()){
+                                    echo '<p class="text-primary">Hello '.$fname.' You have been successfully signed up. Please Log In now.</p>'.' <button onclick="login();" class="btn btn-primary">Click here to login.</button>';
+                                    //$path = "../uploads/$user_id_may_be";
+                                  //  mkdir($path);
+                                }
+                            }
                     }
                     else
                     {

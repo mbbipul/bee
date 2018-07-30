@@ -1,11 +1,16 @@
 <?php
     require 'assets/beeClasses/db.php';
     require 'assets/beeClasses/class.php';
-    $userId = $_GET['userId'];
+    session_start();
+    $userId = $_SESSION['userId'];
     include 'beePosts/includes/security.php';
     require 'beePosts/includes/config.php';
-    $result = mysqli_query($connection,"SELECT * FROM userdescription where userId = $userId");
-
+    $guestUserId = $_GET['userId']; 
+    if($guestUserId===$userId){
+        $userId = $guestUserId;
+        $result = mysqli_query($connection,"SELECT * FROM userdescription where userId = $userId");
+    }
+    $result = mysqli_query($connection,"SELECT * FROM userdescription where userId = $guestUserId");
 ?>
 
 <!DOCTYPE html><html lang='en' class=''>
@@ -164,12 +169,16 @@
 </div>
     <div class="feed-content bee-container" >
           <div class="row bee_userprofile_image">
+              <?php
+                    if($guestUserId==$userId){?>
               <label style="margin-top:250px!important;margin-left: 240px!important;" class="label " data-toggle="tooltip" title="Change your avatar">
                  <input type="file" class="sr-only" id="input" name="image" accept="image/*">
                 
                  <i class="fa fa-edit "></i>
     </label>
+                   
 <?php
+ }
     $userDes=mysqli_fetch_row($result);
     $userProPicId = $userDes[1];
     $proPic = mysqli_query($connection,"SELECT * FROM userprofilepic where userProfilePicId = $userProPicId");

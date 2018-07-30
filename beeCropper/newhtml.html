@@ -4,6 +4,15 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<?php 
+$id = mysql_real_escape_string($_GET['id']);
+mysql_query("UPDATE files SET likes=likes+1 WHERE fileid=".$id);
+if(mysql_affected_rows() > 0)
+{
+    $sql = mysql_fetch_assoc(mysql_query("SELECT `likes` FROM `files` WHERE `fileid` = ".$id));
+
+    echo json_encode(array('total' => $sql[0]['likes']));
+}?>
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -11,6 +20,24 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <embed src="upload-cropped-image-to-server.html" height="200px" width="200px">
+        <img src="xxx.jpg">
+<p>
+    <a href="javascript:test({image_id});">Like</a> <span id="{image_id}_count">150</span>
+</p>
+<script>
+    function test(id)
+{
+    $.ajax({
+        url: 'http://stormstorm.com/like.php',
+        method: 'get',
+        data: {id: id},
+        dataType: json,
+        success: function(data)
+        {
+             $('#' + id + '_count').html(data.total);
+        }
+    });
+}
+</script>
     </body>
 </html>
