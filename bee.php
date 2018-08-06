@@ -61,8 +61,37 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel='stylesheet prefetch' href='//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 <link rel='stylesheet prefetch' href='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
-
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <style>
+    html{
+overflow-y:auto;
+}
+html .home{
+overflow-y:hidden;
+}
+     .result{
+        position: absolute;        
+        z-index: 999;
+        top: 100px;
+        left: 50%;
+    }
+    .result{
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 3;
+    }
+    /* Formatting result items */
+    .result p{
+        margin: 0;
+        padding: 7px 10px;
+        border: 1px solid #CCCCCC;
+        border-top: none;
+        cursor: pointer;
+    }
+    .result p:hover{
+        background: #f2f2f2;
+    }
+   
     .modals,
 .modal-box {
   z-index: 900;
@@ -259,9 +288,7 @@ textarea,
   bottom: 0;
   width: 300px;
   background: #e9ebee;
-  overflow: hidden;
-  
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 .left-content .global-links {
   padding: 10px;
@@ -1422,10 +1449,11 @@ body {
   </a>
   <div class="search-box">
     <div class="input-group ">
-      <input aria-describedby="basic-addon2" class="form-control cyan darken-3" placeholder="Search " type="text" />
-      
+        <input aria-describedby="basic-addon2" id="search" class="form-control cyan darken-3" placeholder="Search " type="text" />
+
+        </div>
     </div>
-  </div>
+    
   <div class="right-group">
     <div class="link-group">
       <a href="beeUserProfile.php?userId=<?php echo $loginUser['userId']?>">
@@ -1464,12 +1492,14 @@ body {
     </div>
   </div>
 </div>
+   
 <div class="left-content" >
   <div class="global-links">
     <a class="noUnderline" href="beeUserProfile.php?userId=<?php echo $userId;?>" >
         <img class="img-circle" src="<?php echo $base_url;?>uploads/<?php echo $logUser->getUserProfilePicUrl($userId);?>">
         <?php echo $logUser->getBeeUserFullName($userId);?>
     </a>
+
       <a class="noUnderline" href="bee.php">
       <img src="https://png.icons8.com/ios/2x/activity-feed-2.png" /> News Feed
       
@@ -1512,8 +1542,11 @@ body {
 
   </div>
 </div>
-<div class="feed-content">
-  
+    <div id="display" style="position:absolute;left: 300px;width: 1200px;z-index: 0;">
+        
+       </div>
+<div class="feed-content"  id="feedContent">
+       
     <div class="recentcontainer">
        <div class="unit" id="tabs">
         <ul class="actions">
@@ -1574,7 +1607,7 @@ p.msg_wrap { word-wrap:break-word; }
 </style>
  <?php
 include 'beePosts/includes/security.php';
-    $result = mysqli_query($connection,"SELECT * FROM posts ORDER BY postId DESC LIMIT $post_limit");
+    $result = mysqli_query($connection,"SELECT * FROM posts ORDER BY postId DESC ");
     while($row = mysqli_fetch_array($result)) { 
         $post_id = $row['postId']; 
         $postUserId = $row['postUserId'];
@@ -1610,7 +1643,17 @@ include 'beePosts/includes/security.php';
           $love = $postUser->checkBeeUserLove($post_id, $userId);
           ?>
             
-          <i class="fa  <?php if($love===1){echo 'fa-heart bee-red-love';}elseif ($love===0) {echo 'fa-heart-o';}?> bee-box" id="beelove<?php echo $post_id?>" style="font-size:30px;display: inline-block;width:200px;padding: 10px 20px 10px 80px;cursor: pointer"><span class="changeNumber" style="font-size:20px;padding-left: 10px;"><?php echo $postUser->countBeePostLove($post_id)?></span></i>      
+          <i class="fa  <?php if($love===1){echo 'fa-heart bee-red-love';}elseif ($love===0) {echo 'fa-heart-o';}?> bee-box" id="beelove<?php echo $post_id?>" style="font-size:30px;display: inline-block;width:200px;padding: 10px 20px 10px 80px;cursor: pointer"><span class="changeNumber<?php echo $post_id?>" style="font-size:20px;padding-left: 10px;"><?php 
+            $loveCount=$postUser->countBeePostLove($post_id);
+            if($loveCount===''){
+                
+            } 
+            else{ 
+                echo $loveCount;
+                
+            }?>
+              </span>
+          </i>      
           <i class="fa fa-share bee-box bee-modal" data-modal="modal-name<?php echo $post_id;?>" style="font-size:30px;display: inline-block;width:200px;padding: 10px 20px 10px 80px"></i>
            <a href="" class="acomment-reply w3-hover-opacity  beesss " style="display: inline;width:200px;padding: 10px 20px 10px 80px" title="" id="acomment-comment-<?php echo $post_id; ?>">
                       <i class="fa fa-comment-o " style="font-size:30px;"></i>
@@ -1651,7 +1694,7 @@ include 'beePosts/includes/security.php';
                       <?php if(!empty($row['videoUrl'])) { ?>
           <iframe width="400" height="300" src="http://www.youtube.com/embed/<?php echo get_youtubeid($row['videoUrl']);?>" frameborder="0" allowfullscreen></iframe>
           <?php } elseif(!empty($row['imageUrl'])) { ?>
-          <img class="media-object" style="width:600px;margin-top: 110px;" src="<?php echo $base_url;?>image.php/<?php echo $row['imageUrl'];?>?width=595&nocache&quality=100&image=/<?php echo $base_folder;?>uploads/<?php echo $row['imageUrl'];?>">
+          <img class="media-object" style="width: 500px;margin-top: 110px;" src="<?php echo $base_url;?>image.php/<?php echo $row['imageUrl'];?>?width=600&nocache&quality=100&image=/<?php echo $base_folder;?>uploads/<?php echo $row['imageUrl'];?>">
           <?php }?>
                 </div>
                            
@@ -1690,7 +1733,7 @@ include 'beePosts/includes/security.php';
     var postId = "<?php echo $post_id?>";
         var dataString = 'postId=' + postId + '&likeUserId=' + likeUserId ;
          if(!$(this).hasClass('bee-red-love')){
-             $('.changeNumber').html(parseInt($('.changeNumber').html(), 10)+1);
+             $('.changeNumber<?php echo $post_id?>').html(parseInt($('.changeNumber<?php echo $post_id?>').html(), 10)+1);
              $.ajax({
                 type: "POST",
                 url: "<?php echo $base_url;?>beeLove.php",
@@ -1702,7 +1745,7 @@ include 'beePosts/includes/security.php';
                 });
           }
           if($(this).hasClass('bee-red-love')){
-             $('.changeNumber').html(parseInt($('.changeNumber').html(), 10)-1);
+             $('.changeNumber<?php echo $post_id?>').html(parseInt($('.changeNumber<?php echo $post_id?>').html(), 10)-1);
              $.ajax({
                 type: "POST",
                 url: "<?php echo $base_url;?>beeNoLove.php",
@@ -1774,6 +1817,7 @@ $total_comments = mysqli_num_rows($comments);
 		
 	} ?>
   </div>
+    </div>
     <div class="row">
         <div class="[ col-xs-12  ]">
             <div class="[ panel panel-default ] panel-google-plus">
@@ -1944,9 +1988,7 @@ $total_comments = mysqli_num_rows($comments);
     </div>
     
     </div>
-    </div>
-</div>
-    
+    </div>    
 <div class="right-content">
     <ul>
         <li>
@@ -1975,7 +2017,7 @@ $total_comments = mysqli_num_rows($comments);
 </div>
       
 
-     <div class="card-content" style="margin:0px!important;padding;0px!important;top:2px!important;">
+     <div class="card-content" style="margin:0px!important;padding:0px!important;top:2px!important;">
               <p>I am a very simple card. I am good at containing small bits of information.
               I am convenient because I require </p>
        <p style="display: inline-block;" class="waves-effect waves-light tag">class starting time: 2:12:90</p>
@@ -2416,7 +2458,83 @@ $(".close-modal, .modal-sandbox").click(function(){
             window.addEventListener("load", calculate_popups);
            
         </script>
-      
+        <script>
+            //Getting value from "ajax.php".
+function fill(Value) {
+   //Assigning value to "search" div in "search.php" file.
+   $('#search').val(Value);
+
+   //Hiding "display" div in "search.php" file.
+
+   $('#display').hide();
+
+}
+
+$(document).ready(function() {
+
+   //On pressing a key on "Search box" in "search.php" file. This function will be called.
+
+   $("#search").keyup(function() {
+
+       //Assigning search box value to javascript variable named as "name".
+
+       var name = $('#search').val();
+
+       //Validating, if "name" is empty.
+
+       if (name === "") {
+
+           //Assigning empty value to "display" div in "search.php" file.
+
+           $("#display").hide();
+           $("#feedContent").show();
+
+       }
+
+       //If name is not empty.
+
+       else {
+
+           //AJAX is called.
+
+           $.ajax({
+
+               //AJAX type is "Post".
+
+               type: "POST",
+
+               //Data will be sent to "ajax.php".
+
+               url: "beeSearch/search.php",
+
+               //Data, that will be sent to "ajax.php".
+
+               data: {
+
+                   //Assigning value of "name" into "search" variable.
+
+                   search: name
+
+               },
+
+               //If result found, this funtion will be called.
+
+               success: function(html) {
+
+                   //Assigning result to "display" div in "search.php" file.
+                       document.getElementById("feedContent").style.display = "none";
+                   $("#display").html(html).show();
+
+               }
+
+           });
+
+       }
+
+   });
+
+});
+            </script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
     var domain = "<?php echo $base_url;?>";

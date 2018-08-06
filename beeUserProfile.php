@@ -66,6 +66,62 @@
     .img-container img {
       max-width: 100%;
     }
+    
+.transparent_btn {
+	display: inline-block;
+	padding: 10px 14px;
+	color: #FFF;
+	border: 1px solid #FFF;
+	text-decoration: none;
+	font-size: 14px;
+	line-height: 120%;
+	background-color: rgba(255,255,255, 0);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-transition: background-color 300ms ease;
+	-moz-transition: background-color 300ms ease;
+	transition: background-color 300ms ease;
+	cursor: pointer;
+}
+.transparent_btn:hover {
+	background-color: rgba(255,255,255, 0.3);
+	color: #FFF;
+}
+
+/* Orange Button */
+.transparent_btn.oranges {
+	color: #000;
+	border-color: #ffc65d;
+}
+.transparent_btn.oranges:hover {
+	background-color: rgba(255, 198, 93, 0.3);
+}
+.transparent_btn.reds {
+	color: #000;
+	border-color: red;
+}
+.transparent_btn.reds:hover {
+	background-color: rgba(255, 198, 93, 0.3);
+}
+
+/* Blue Button */
+.transparent_btn.blues {
+	color: #000;
+	border-color: #aeddf5;
+}
+.transparent_btn.blues:hover {
+	background-color: rgba(174, 221, 245, 0.3);
+}
+
+/* Green Button */
+.transparent_btn.greens {
+	color: #000;
+	border-color: #86ec93;
+}
+.transparent_btn.greens:hover {
+	background-color: rgba(134, 236, 147, 0.3);
+}
   </style>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 
@@ -179,11 +235,16 @@
                    
 <?php
  }
+ else{
+      echo '<input type="button" id="sendFriendRequest" class="transparent_btn greens waves-effect alert-success z-depth-5" style="position:fixed;top:300px;left: 285px;padding: 5px;" value="Add friend"/>';
+ }
     $userDes=mysqli_fetch_row($result);
     $userProPicId = $userDes[1];
     $proPic = mysqli_query($connection,"SELECT * FROM userprofilepic where userProfilePicId = $userProPicId");
     $userProfilePic=mysqli_fetch_row($proPic);
     $userProfilePicUrl = $userProfilePic[1];
+   // $_SESSION['request'] = $q->get_sent_friend_request_ids($user_id);
+
 ?>
             <img id="avatar" class="img-circle bee-user-pic-position z-depth-5" 
                  src="<?php echo $base_url;?>uploads/<?php echo $userProfilePicUrl;?>" alt="<?php echo $userProfilePicUrl;?>" />
@@ -520,6 +581,29 @@
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 
+</script>
+<script>
+    $(document).ready(function() {
+
+   //On pressing a key on "Search box" in "search.php" file. This function will be called.
+
+   $(document).ready(function(){
+    $("#sendFriendRequest").click(function(){        
+        var toId = <?php echo $guestUserId;?>;
+
+        $.ajax({
+            type: "POST",
+            url: "beeFriends/sentFriendRequests.php",
+            data: "toId=" + toId,
+            success: function(){
+                $("#sendFriendRequest").val("Sent Friend Request");
+            }
+        });
+    });
+});
+
+});
+    
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

@@ -321,3 +321,271 @@ Write a comment..</a>
 <!-- AddThis Button END -->
 </body>
 </html>
+
+
+
+//post
+<style>
+p.msg_wrap { word-wrap:break-word; }
+</style>
+<?php
+include '../assets/beeClasses/beeUserDetails.php';
+include('includes/SimpleImage.php');
+include('includes/config.php'); 
+$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/'.$base_folder.'uploads/'; 
+$insLove = new beeUserDetails();
+function random_filename($length, $directory = '', $extension = '')
+    {
+        // default to this files directory if empty...
+        $dir = !empty($directory) && is_dir($directory) ? $directory : dirname(__FILE__);
+
+        do {
+            $key = '';
+            $keys = array_merge(range(0, 9), range('a', 'z'));
+
+            for ($i = 0; $i < $length; $i++) {
+                $key .= $keys[array_rand($keys)];
+            }
+        } while (file_exists($dir . '/' . $key . (!empty($extension) ? '.' . $extension : '')));
+
+        return $key . (!empty($extension) ? '.' . $extension : '');
+    }
+
+
+// Checks in current directory of php file, with zip extension...
+    $rand_file_name =random_filename(50, $uploaddir, 'png');
+$new_file =  $uploaddir.$rand_file_name;
+if(!empty($_POST['message'])) {
+	include_once 'includes/security.php';
+	include_once 'includes/smileys.php';
+	
+	$message = clean(mysqli_real_escape_string($connection,$_POST['message']));
+	$message = special_chars($message); 
+	$time = time();
+	//getting image link
+	if(!empty($_POST['pic_url'])) {
+		$imageOrginalUrl = strip_tags($_POST['pic_url']);
+                $file = $uploaddir.$imageOrginalUrl;
+                if (!copy($file, $new_file)) {
+                    echo "failed to copy";
+                    
+                }
+                else {
+                    $image = $rand_file_name;
+                    if (file_exists($file)) {
+                        unlink($file);
+                     }
+                }
+	} else {
+		$image = '';
+	}
+	
+	//getting video link
+	if(!empty($_POST['y_link'])) {
+		$video = fix_url(strip_tags($_POST['y_link']));
+	} else {
+		$video = '';
+	}
+	
+	//insert into wall table
+        $loginUserId = $_POST['loginUserId'];
+	 $query = mysqli_query($connection,"INSERT INTO posts "
+                 . "(postId,imageUrl,videoUrl,postCap,postTagId,location,"
+                 . "postDate,postUserId) VALUES "
+                 . "('','$image', '$video','$message','','','$time','$loginUserId')") 
+                 or die(mysql_error());
+	 $ins_id = mysqli_insert_id($connection);
+	
+	
+?>
+            <div class="row" >
+                <div class="[ col-xs-12  ]" id="post-<?php echo $ins_id; ?>"> <i class="pointer" id="pagination-<?php echo $ins_id;?>"></i>
+      <div class="[ panel panel-default ] panel-google-plus">
+        <!-- Story -->
+        <div class="panel-google-plus-tags">
+                    <ul>
+                        <li>#Millennials</li>
+                        <li>#Generation</li>
+                    </ul>
+        </div>
+        
+          <div class="panel-heading">
+             <img class="[ img-circle pull-left ]" src="<?php echo $base_url;?>uploads/<?php echo $insPostUser->getUserProfilePicUrl($ins_id);?>" height="50px" width="50px" alt="<?php echo $insPostUser->getBeeUserFullName($postUserId);?>" />
+              <h3><a href="<?php echo $insPostUser->getUserUrl($ins_id);?>"><?php echo $insPostUser->getBeeUserFullName($ins_id);?></a></h3>
+              <h5 style="padding-top:10px;"><span>Shared publicly</span> - <span><?php echo timeAgo($time);?> </span> </h5>
+           </div>
+        <div class="panel-body">
+          <p class="msg_wrap">
+              <?php echo parse_smileys(make_clickable(nl2br(stripslashes($message))), $smiley_folder); ?>
+          </p>
+          </div>
+          <?php if(!empty($video)) { ?>
+          <iframe width="400" height="300" src="http://www.youtube.com/embed/<?php echo get_youtubeid($video);?>" frameborder="0" allowfullscreen></iframe>
+          <?php } elseif(!empty($image)) { ?>
+          <img class="panel-google-plus-image" src="<?php echo $base_url;?>image.php/<?php echo $image;?>?width=595&nocache&quality=100&image=/<?php echo $base_folder;?>uploads/<?php echo $image;?>">
+          <?php } 
+          $insLove = $insPostUser->checkBeeUserLove($ins_id, $loginUserId);
+          ?>
+            
+          <i class="fa  <?php if($insLove===1){echo 'fa-heart bee-red-love';}elseif ($insLove===0) {echo 'fa-heart-o';}?> bee-box" id="beelove<?php echo $ins_id?>" style="font-size:30px;display: inline-block;width:200px;padding: 10px 20px 10px 80px;cursor: pointer"><span class="changeNumber<?php echo $ins_id?>" style="font-size:20px;padding-left: 10px;"><?php echo $insPostUser->countBeePostLove($ins_id)?></span></i>      
+          <i class="fa fa-share bee-box bee-modal" data-modal="modal-name<?php echo $ins_id;?>" style="font-size:30px;display: inline-block;width:200px;padding: 10px 20px 10px 80px"></i>
+           <a href="" class="acomment-reply w3-hover-opacity  beesss " style="display: inline;width:200px;padding: 10px 20px 10px 80px" title="" id="acomment-comment-<?php echo $ins_id; ?>">
+                      <i class="fa fa-comment-o " style="font-size:30px;"></i>
+</a>
+           
+               
+
+   <!-- Trigger Modal. -->
+
+<!-- Modal -->
+<div class="modals" id="modal-name<?php echo $ins_id;?>">
+  <div class="modal-sandbox"></div>
+  <div class="modal-box">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="media">
+                            <div class="media-left">
+                                <img class="media-object img-circle" src="http://localhost/bee/beePosts/uploads/yf5m60lmz6bh0qg6udpoy2a1nsog3fkcaz1ff2w4270dq5ghe8.png" height="40px" width="40px" alt="Food Portfolio" />              </a>
+                            </div>
+                            <div class="media-right" style="padding-left:10px;">Bipul Mandol
+                                <br> <span>Publically</span>
+                            </div>
+                            
+                        </div>
+      </div>
+      <div class="modal-body" style="padding:0px!important;">
+          <form>
+      <div class="form-group" style="border: none!important">
+      <label for="comment"></label>
+      <textarea class="form-control bee-share-post-text-area" rows="5" id="comment" placeholder="say something"></textarea>
+    </div>
+  </form>
+                        
+                        
+          <div class="media" >
+                <div class="media-left">
+                      <?php if(!empty($row['videoUrl'])) { ?>
+          <iframe width="400" height="300" src="http://www.youtube.com/embed/<?php echo get_youtubeid($row['videoUrl']);?>" frameborder="0" allowfullscreen></iframe>
+          <?php } elseif(!empty($row['imageUrl'])) { ?>
+          <img class="media-object" style="width: 500px;margin-top: 110px;" src="<?php echo $base_url;?>image.php/<?php echo $row['imageUrl'];?>?width=600&nocache&quality=100&image=/<?php echo $base_folder;?>uploads/<?php echo $row['imageUrl'];?>">
+          <?php }?>
+                </div>
+                           
+                            
+           </div>
+          <div style="padding-left: 10px;border-left: 10px solid #a6adff;z-index: -9;">
+          <div class="panel-heading">
+             <img class="[ img-circle pull-left ]" src="<?php echo $base_url;?>uploads/<?php echo $insPostUser->getUserProfilePicUrl($postUserId);?>" height="50px" width="50px" alt="<?php echo $insPostUser->getBeeUserFullName($postUserId);?>" />
+             <div style="margin-left:35px!important;">
+             <h6><a href="<?php echo $insPostUser->getUserUrl($postUserId);?>"><?php echo $insPostUser->getBeeUserFullName($postUserId);?></a></h6>
+              <h6 style="padding-left: 5px;"><span>Shared publicly</span> - <span><?php echo timeAgo($row['postDate']);?> </span> </h6>
+             </div>
+             </div>
+          <div class="panel-body" style="padding:5px!important;">
+              <p >
+              <?php echo parse_smileys(make_clickable(nl2br(stripslashes($row['postCap']))), $smiley_folder); ?>
+          </p>
+          </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default close-modal" >Cancel</button>
+        <button type="button" class="btn btn-primary">Share Post</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- Aditional Styles -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+
+           <script>
+               document.querySelector('#beelove<?php echo $ins_id?>').addEventListener('click', function() {
+    var likeUserId = "<?php echo $userId;?>";
+    var postId = "<?php echo $ins_id?>";
+        var dataString = 'postId=' + postId + '&likeUserId=' + likeUserId ;
+         if(!$(this).hasClass('bee-red-love')){
+             $('.changeNumber<?php echo $ins_id?>').html(parseInt($('.changeNumber<?php echo $ins_id?>').html(), 10)+1);
+             $.ajax({
+                type: "POST",
+                url: "<?php echo $base_url;?>beeLove.php",
+                data: dataString,
+                cache: false,
+                success: function() {
+
+                }
+                });
+          }
+          if($(this).hasClass('bee-red-love')){
+             $('.changeNumber<?php echo $ins_id?>').html(parseInt($('.changeNumber<?php echo $ins_id?>').html(), 10)-1);
+             $.ajax({
+                type: "POST",
+                url: "<?php echo $base_url;?>beeNoLove.php",
+                data: dataString,
+                cache: false,
+                success: function() {
+
+                }
+                });
+          }
+});
+
+               
+               document.querySelector('#beelove<?php echo $ins_id?>').addEventListener('click', function() { 
+            $(this).toggleClass('fa-heart');
+            $(this).toggleClass('fa-heart-o');
+            $(this).toggleClass('bee-red-love');
+});
+   </script>
+        <div class="activity-comments">
+            
+            <ul id="CommentPosted<?php echo $ins_id; ?>" >
+<?php 
+//fetch comments from comments table using post id
+$comments = mysqli_query($connection,"SELECT * FROM `comments` WHERE `post_id`=$ins_id ORDER BY `comment_id` ASC ");
+$total_comments = mysqli_num_rows($comments);
+?>
+<li class="show-all" id="show-all-<?php echo $ins_id; ?>" <?php if($total_comments == 0) { ?> style="display:none" <?php } ?>><a href="javascript:;"><span id="comment_count_<?php echo $ins_id;?>"><?php echo $total_comments;?></span> comments</a></li>
+
+ <?php while($comt = mysqli_fetch_array($comments)) { $comment_id = $comt['comment_id']; $commentUserId= $comt['userId'];?>
+<li id="li-comment-<?php echo $comment_id; ?>" >
+<div class="acomment-avatar ">
+    <a href="<?php echo $insPostUser->getUserUrl($commentUserId);?>" rel="nofollow" >
+        <img src="<?php echo $base_url;?>uploads/<?php echo $insPostUser->getUserProfilePicUrl($commentUserId);?>" class="img-circle " alt="Avatar Image" >
+    </a>
+    <p style="float:right; text-align:right; font-size:10px;"><a href="javascript:;" rel="<?php echo $ins_id; ?>" class="comment-delete" id="comment_delete_<?php echo $comment_id; ?>">X</a></p>
+</div>
+<div class="acomment-meta">
+    <a href="<?php echo $insPostUser->getUserUrl($commentUserId);?>"><?php echo $insPostUser->getBeeUserFullName($commentUserId);?></a> <br> <?php echo timeAgo($comt['commented_date']);?> 
+</div>
+<div class="acomment-content">
+    <p class="msg_wrap" style="padding-left:30px;margin-bottom: 10px!important"><?php echo parse_smileys(make_clickable(nl2br(stripslashes($comt['comment']))), $smiley_folder); ?></p>
+  <?php if(!empty($comt['picture'])) { ?>
+  <p class="msg_image"><img src="<?php echo $base_url;?>uploads/<?php echo $comt['picture'];?>"></p>
+  <?php } ?>
+</div></li>
+<?php } ?>
+</ul>
+
+        <form  method="post" id="fb-<?php echo $ins_id; ?>" class="ac-form">
+        <div class="panel-google-plus-comment ac-reply-avatar">
+            <img class="img-circle" src="<?php echo $base_url;?>uploads/<?php echo $insPostUser->getUserProfilePicUrl($postUserId);?>" alt="User Image" />
+        </div>
+        <div class="ac-reply-content">
+        <div class="ac-textarea panel-google-plus-textarea">
+        <textarea id="ac-input-<?php echo $ins_id; ?>" class="ac-input" name="comment" style="height:40px;"></textarea>
+        <input type="hidden" id="act-id-<?php echo $ins_id; ?>" name="act_id" value="<?php echo $ins_id; ?>" />
+        </div>
+            <input type="hidden" name="logUserId" value="<?php echo $userId;?>">
+        <input name="ac_form_submit" class=" confirm live_comment_submit btn btn-success" title="fb-<?php echo $ins_id; ?>" id="comment_id_<?php echo $ins_id; ?>" type="button" value="Submit"> &nbsp; or <a href="javascript:;" class="comment_cancel btn-danger btn" id="<?php echo $ins_id; ?>">Cancel</a>			
+        </div>
+        </form>
+     
+</div>
+      </div>
+
+                </div>
+                </
+<?php } ?>

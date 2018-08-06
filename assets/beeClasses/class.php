@@ -536,11 +536,8 @@ class FUNCTIONS {
                 $query = $conn->prepare($sql);
                 $query->bindParam(1, $friend_id);
                 $query->bindParam(2, $user_id);
-                 $query->bindParam(3, $time);
-                 if($query->execute())
-                 echo 1;
-                 else
-                 echo 0;
+                $query->bindParam(3, $time);
+                 $query->execute();
     }
 
     public function cookie_login($A,$B)

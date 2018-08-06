@@ -87,8 +87,49 @@ class beeUserDetails {
         return $beeNoLoveChecked['beeLove'];
     }
     
+    public function showSearchResult($searchId) {
+        $base_url='http://localhost/bee/beePosts/'; // with trailing slash
+        ?>
+    <style>
+    .media{box-shadow:0px 0px 4px -2px #000; margin: 20px 0; padding:15px;}
+.media-body{padding:10px;}
+.media-body a{text-decoration:none;}
+.media .label{padding:5px 10px;}
+</style>
+
+    <div class="row">
+
+        <div class="col-md-12  " id="profile<?php echo $searchId;?>">
+            <div class="media waves-effect">								
+                <a class="pull-left" href="<?php echo $this->getUserUrl($searchId) ?>">									
+                    <img class="media-object dp img-circle" src="<?php echo $base_url;?>uploads/<?php echo $this->getUserProfilePicUrl($searchId); ?>" style="width: 100px;height:100px;">								
+                </a>								
+                <div class="media-body">									
+                    <h4 class="media-heading"><a href="<?php echo $this->getUserUrl($searchId);?>"><?php echo $this->getBeeUserFullName($searchId)?></a><small> London</small></h4>									
+                    <h5>Software Developer at <a href="http://example.com">example.com</a></h5>									
+                    <a href="#"><span class="label label-danger waves-effect waves-teal">ladies_man06</span></a>									
+                    <a><span class="label label-default waves-effect waves-teal">Last Seen: Today</span></a>                                                                                                                                        
+                    <a href="#"><span class="label label-success waves-effect waves-teal">Add friend</span></a>								
+                    <a href="#"><span class="label label-success waves-effect waves-teal">Send Message</span></a>									
+                    <a href="#"><span class="label label-warning waves-effect waves-teal">Remove</span></a>								
+                </div>							
+            </div>						
+        </div>	
+        
+
+    </div>
+<script>
+    $('#profile<?php echo $searchId;?>').click(function() {
+    window.location.href = 'http://localhost/bee/beeUserProfile.php?userId=<?php echo $searchId;?>';
+    return false;
+});
+    </script>
+
+   <?php }
+    
 }
-        $q = new beeUserDetails();
-        echo $q->checkBeeUserLove(22, 1);
+        //for test
+       // $q = new beeUserDetails();
+       // echo $q->checkBeeUserLove(22, 1);
     
 ?>

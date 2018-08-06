@@ -83,17 +83,17 @@ $lft = array('left' => '0', 'right' => '1', 'highlight' => '2'); ?>
           <h4><a href="http://www.facebook.com/itzurkarthi" target="_blank">Karthikeyan</a></h4>
           <p>0 sec ago</p>
          
-        </div>
-    </div>
-
+                </div>
+                </div>
+                  
       <p class="msg_wrap"><?php echo parse_smileys(make_clickable(nl2br(stripslashes($message))), $smiley_folder); ?></p>
        <?php if(!empty($video)) { ?>
           <iframe width="400" height="300" src="http://www.youtube.com/embed/<?php echo get_youtubeid($video);?>" frameborder="0" allowfullscreen></iframe>
           <?php } elseif(!empty($image)) { ?>
           <img src="<?php echo $base_url;?>image.php/<?php echo $image;?>?width=400&nocache&quality=100&image=/<?php echo $base_folder;?>uploads/<?php echo $image;?>">
           <?php } ?>
-
-    </div>
+                    
+                </div>
    
 <!-- comment starts -->
 <div class="activity-comments">
@@ -102,19 +102,19 @@ $lft = array('left' => '0', 'right' => '1', 'highlight' => '2'); ?>
   <a href="javascript:;" class="acomment-reply" title="" id="acomment-comment-<?php echo $ins_id; ?>">
 Write a comment..</a>
 </ul>
-<form  method="post" id="fb-<?php echo $ins_id; ?>" class="ac-form">
+        <form  method="post" id="fb-<?php echo $ins_id; ?>" class="ac-form">
 <div class="ac-reply-avatar"><img src="http://0.gravatar.com/avatar/222dad342987a085011139578299df12?s=30&r=G" width="30" height="30" alt="Avatar Image"></div>
-<div class="ac-reply-content">
+        <div class="ac-reply-content">
 <div class="ac-textarea">
-<textarea id="ac-input-<?php echo $ins_id; ?>" class="ac-input" name="comment" style="height:40px;"></textarea>
-<input type="hidden" id="act-id-<?php echo $ins_id; ?>" name="act_id" value="<?php echo $ins_id; ?>" />
+        <textarea id="ac-input-<?php echo $ins_id; ?>" class="ac-input" name="comment" style="height:40px;"></textarea>
+        <input type="hidden" id="act-id-<?php echo $ins_id; ?>" name="act_id" value="<?php echo $ins_id; ?>" />
 <input type="file" name="file" id="file-<?php echo $ins_id;?>" />
-</div>
+        </div>
 <input name="ac_form_submit" class="uibutton confirm live_comment_submit" title="fb-<?php echo $ins_id; ?>" id="comment_id_<?php echo $ins_id; ?>" type="button" value="Submit"> &nbsp; or <a href="javascript:;" class="comment_cancel" id="<?php echo $ins_id; ?>">Cancel</a>			
-</div>
-</form>
+        </div>
+        </form>
 </div>
 <!-- comment ends -->
-  </div>
+            </div>
 </li>
 <?php } ?>
